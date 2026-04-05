@@ -11,282 +11,312 @@
 </head>
 <body>
 
+  <!-- CURSOR -->
+  <div class="cursor"></div>
+  <div class="cursor-follower"></div>
+
   <!-- NAV -->
   <nav class="nav">
     <div class="nav__logo">CRUDA<span>®</span></div>
     <ul class="nav__links">
-      <li><a href="#cervezas">Cervezas</a></li>
+      <li><a href="#catalogo">Cervezas</a></li>
       <li><a href="#proceso">Proceso</a></li>
-      <li><a href="#manifiesto">Manifiesto</a></li>
+      <li><a href="#contacto">Contacto</a></li>
       <li><a href="#contacto" class="nav__cta">Visítanos</a></li>
     </ul>
     <button class="nav__burger" aria-label="Menú"><span></span><span></span></button>
   </nav>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__grid">
-
-      <div class="hero__block hero__block--title">
-        <span class="hero__pre">Cervecería Artesanal · Est. 2019</span>
-        <h1 class="hero__title">
-          <span class="hero__title-row">SIN</span>
-          <span class="hero__title-row hero__title-row--outline">FILTROS.</span>
-          <span class="hero__title-row hero__title-row--amber">SIN</span>
-          <span class="hero__title-row">EXCUSAS.</span>
-        </h1>
+  <!-- INTRO — Fullscreen -->
+  <section class="intro">
+    <div class="intro__bg-text" aria-hidden="true">CRUDA</div>
+    <div class="intro__content">
+      <p class="intro__tag"><span class="tag-blink"></span>Cervecería Artesanal · Coquimbo</p>
+      <h1 class="intro__title">
+        <span class="intro__title-line" data-text="SIN">SIN</span>
+        <span class="intro__title-line intro__title-line--outline" data-text="FILTROS">FILTROS</span>
+        <span class="intro__title-line intro__title-line--amber" data-text="SIN">SIN</span>
+        <span class="intro__title-line" data-text="EXCUSAS">EXCUSAS</span>
+      </h1>
+      <div class="intro__scroll-hint">
+        <span>Scroll para descubrir</span>
+        <div class="scroll-bar"><div class="scroll-bar__fill"></div></div>
       </div>
-
-      <div class="hero__block hero__block--img">
-        <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=800&q=85&auto=format&fit=crop" alt="Cerveza artesanal CRUDA" />
-        <div class="hero__img-tag">Lote #047 — Temporada</div>
+    </div>
+    <div class="intro__bottle-wrap">
+      <img
+        class="intro__bottle"
+        src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&q=90&auto=format&fit=crop&crop=center"
+        alt="CRUDA cerveza artesanal"
+      />
+      <div class="intro__bottle-glow"></div>
+    </div>
+    <div class="intro__ticker">
+      <div class="ticker__inner">
+        <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
+        <span>SIN FILTROS</span><span class="t-sep">✦</span>
+        <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
+        <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
+        <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
+        <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
+        <span>SIN FILTROS</span><span class="t-sep">✦</span>
+        <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
+        <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
+        <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
       </div>
+    </div>
+  </section>
 
-      <div class="hero__block hero__block--desc">
-        <p>Fermentamos con obsesión.<br/>Embotellamos con honestidad.<br/>Bebemos sin disculpas.</p>
-        <a href="#cervezas" class="btn btn--amber">Ver catálogo →</a>
-      </div>
+  <!-- SCROLLYTELLING — Botella sticky -->
+  <section class="scrolly">
 
-      <div class="hero__block hero__block--stat">
-        <div class="hero-stat">
-          <span class="hero-stat__num">12</span>
-          <span class="hero-stat__label">Estilos en rotación</span>
+    <div class="scrolly__bottle-stage">
+      <div class="bottle-wrap">
+        <div class="bottle-glow"></div>
+        <img
+          class="bottle-img"
+          src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&q=90&auto=format&fit=crop&crop=center"
+          alt="CRUDA"
+        />
+        <div class="bottle-particles">
+          <span></span><span></span><span></span>
+          <span></span><span></span><span></span>
         </div>
-        <div class="hero-stat">
-          <span class="hero-stat__num">100%</span>
-          <span class="hero-stat__label">Ingredientes locales</span>
-        </div>
-        <div class="hero-stat">
-          <span class="hero-stat__num">0</span>
-          <span class="hero-stat__label">Aditivos artificiales</span>
-        </div>
       </div>
+      <div class="scene-counter">
+        <span class="scene-counter__current">01</span>
+        <span class="scene-counter__sep">/</span>
+        <span class="scene-counter__total">04</span>
+      </div>
+    </div>
 
-      <div class="hero__block hero__block--ticker">
-        <div class="ticker">
-          <div class="ticker__inner">
-            <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
-            <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
-            <span>SIN FILTROS</span><span class="t-sep">✦</span>
-            <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
-            <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
-            <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
-            <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
-            <span>SIN FILTROS</span><span class="t-sep">✦</span>
-            <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
-            <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
+    <div class="scrolly__steps">
+
+      <!-- Escena 01 — Origen -->
+      <div class="step" data-scene="1" data-color="#0F0E0A" data-bottle="left">
+        <div class="step__inner">
+          <span class="step__num">01</span>
+          <h2 class="step__title">El<br/><span class="text-outline">origen.</span></h2>
+          <p class="step__body">
+            Empezamos en un garaje con 50 litros, una olla prestada y una obsesión irracional por el sabor. Coquimbo, 2019.
+          </p>
+          <div class="step__detail">
+            <span>Malta local · Lúpulo Cascade</span>
           </div>
+        </div>
+      </div>
+
+      <!-- Escena 02 — Fermentación -->
+      <div class="step" data-scene="2" data-color="#1A0F00" data-bottle="center">
+        <div class="step__inner">
+          <span class="step__num">02</span>
+          <h2 class="step__title">La<br/><span class="text-outline">espera.</span></h2>
+          <p class="step__body">
+            72 horas mínimas de fermentación natural. Sin atajos, sin aceleradores. La levadura trabaja a su propio ritmo.
+          </p>
+          <div class="step__stat-row">
+            <div class="step__stat">
+              <span class="step__stat-num">72h</span>
+              <span class="step__stat-label">Fermentación mínima</span>
+            </div>
+            <div class="step__stat">
+              <span class="step__stat-num">18°C</span>
+              <span class="step__stat-label">Temperatura controlada</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Escena 03 — El carácter -->
+      <div class="step" data-scene="3" data-color="#1C0800" data-bottle="right">
+        <div class="step__inner">
+          <span class="step__num">03</span>
+          <h2 class="step__title">El<br/><span class="text-outline">carácter.</span></h2>
+          <p class="step__body">
+            Cada lote tiene su personalidad. Amargo sin disculpas, dulce sin vergüenza, oscuro sin miedo. Así somos.
+          </p>
+          <div class="step__tags">
+            <span>Amargo</span>
+            <span>Aromático</span>
+            <span>Honesto</span>
+            <span>Sin filtrar</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Escena 04 — El momento -->
+      <div class="step" data-scene="4" data-color="#0A0800" data-bottle="center-large">
+        <div class="step__inner">
+          <span class="step__num">04</span>
+          <h2 class="step__title">Tu<br/><span class="text-amber">momento.</span></h2>
+          <p class="step__body">
+            Sírvela fría. Bébela lento. Compártela con alguien que lo merezca.
+          </p>
+          <a href="#catalogo" class="btn btn--amber">Ver todas las cervezas →</a>
         </div>
       </div>
 
     </div>
   </section>
 
-  <!-- MANIFIESTO -->
-  <section class="manifiesto" id="manifiesto">
-    <div class="manifiesto__inner">
-      <div class="manifiesto__left">
-        <span class="section-tag">— 01 / Manifiesto</span>
-        <h2 class="manifiesto__title">
-          La cerveza<br/>
-          industrial<br/>
-          <span class="text-outline">nos aburre.</span>
-        </h2>
-      </div>
-      <div class="manifiesto__right">
-        <p class="manifiesto__body">
-          Empezamos en un garaje con un fermentador de 50 litros y una obsesión
-          irracional por el sabor. Hoy seguimos igual de obsesionados, solo que
-          con más barriles y menos espacio en el garaje.
-        </p>
-        <p class="manifiesto__body">
-          Cada lote de CRUDA es una declaración: que la cerveza buena no necesita
-          marketing, necesita tiempo, ingredientes honestos y gente que sepa lo
-          que está haciendo.
-        </p>
-        <div class="manifiesto__img-wrap">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&auto=format&fit=crop" alt="Proceso de elaboración" />
-          <div class="manifiesto__img-label">Nuestro garaje original · 2019</div>
-        </div>
-      </div>
+  <!-- CATÁLOGO -->
+  <section class="catalogo" id="catalogo">
+    <div class="catalogo__header">
+      <span class="section-tag">— El lineup</span>
+      <h2 class="catalogo__title">Elige<br/><span class="text-outline">tu CRUDA.</span></h2>
     </div>
-  </section>
+    <div class="catalogo__grid">
 
-  <!-- CERVEZAS -->
-  <section class="cervezas" id="cervezas">
-    <div class="cervezas__header">
-      <span class="section-tag">— 02 / Catálogo</span>
-      <h2 class="cervezas__title">El<br/><span class="text-outline">lineup.</span></h2>
-    </div>
-
-    <div class="cervezas__grid">
-
-      <article class="cerveza cerveza--featured">
-        <div class="cerveza__img">
-          <img src="https://images.unsplash.com/photo-1566633806827-ff79a3eb7e25?w=600&q=80&auto=format&fit=crop" alt="IPA Bestia" />
+      <article class="beer-card" data-abv="7.2">
+        <div class="beer-card__img">
+          <img src="https://images.unsplash.com/photo-1566633806827-ff79a3eb7e25?w=600&q=80&auto=format&fit=crop" alt="BESTIA IPA" />
         </div>
-        <div class="cerveza__body">
-          <div class="cerveza__meta">
-            <span class="cerveza__style">West Coast IPA</span>
-            <span class="cerveza__abv">7.2% ABV</span>
+        <div class="beer-card__body">
+          <div class="beer-card__top">
+            <span class="beer-card__style">West Coast IPA</span>
+            <span class="beer-card__abv">7.2%</span>
           </div>
-          <h3 class="cerveza__name">BESTIA</h3>
-          <p class="cerveza__desc">Lúpulo Cascade y Citra. Amarga sin disculpas. Para quienes saben lo que quieren.</p>
-          <div class="cerveza__ibu">IBU 65 · Lote #047</div>
+          <h3 class="beer-card__name">BESTIA</h3>
+          <p class="beer-card__desc">Lúpulo Cascade y Citra. Amarga sin disculpas.</p>
+          <div class="beer-card__bar">
+            <div class="beer-card__bar-fill" style="--pct: 85%"></div>
+          </div>
+          <div class="beer-card__ibu">IBU 65 · Lote #047</div>
         </div>
       </article>
 
-      <article class="cerveza cerveza--dark">
-        <div class="cerveza__img">
-          <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80&auto=format&fit=crop" alt="Stout Oscura" />
+      <article class="beer-card beer-card--dark" data-abv="9.4">
+        <div class="beer-card__img">
+          <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80&auto=format&fit=crop" alt="SOMBRA Stout" />
         </div>
-        <div class="cerveza__body">
-          <div class="cerveza__meta">
-            <span class="cerveza__style">Imperial Stout</span>
-            <span class="cerveza__abv">9.4% ABV</span>
+        <div class="beer-card__body">
+          <div class="beer-card__top">
+            <span class="beer-card__style">Imperial Stout</span>
+            <span class="beer-card__abv">9.4%</span>
           </div>
-          <h3 class="cerveza__name">SOMBRA</h3>
-          <p class="cerveza__desc">Café, cacao y vainilla. Densa, oscura y sin pedir perdón.</p>
-          <div class="cerveza__ibu">IBU 45 · Lote #031</div>
+          <h3 class="beer-card__name">SOMBRA</h3>
+          <p class="beer-card__desc">Café, cacao y vainilla. Densa, oscura, sin pedir perdón.</p>
+          <div class="beer-card__bar">
+            <div class="beer-card__bar-fill" style="--pct: 70%"></div>
+          </div>
+          <div class="beer-card__ibu">IBU 45 · Lote #031</div>
         </div>
       </article>
 
-      <article class="cerveza cerveza--amber">
-        <div class="cerveza__meta">
-          <span class="cerveza__style">Amber Ale</span>
-          <span class="cerveza__abv">5.8% ABV</span>
+      <article class="beer-card beer-card--amber" data-abv="5.8">
+        <div class="beer-card__img">
+          <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&q=80&auto=format&fit=crop" alt="FORJA Amber Ale" />
         </div>
-        <h3 class="cerveza__name">FORJA</h3>
-        <p class="cerveza__desc">Malta caramelizada, toque de nuez y final limpio. El equilibrio que no sabías que necesitabas.</p>
-        <div class="cerveza__ibu">IBU 28 · Lote #052</div>
+        <div class="beer-card__body">
+          <div class="beer-card__top">
+            <span class="beer-card__style">Amber Ale</span>
+            <span class="beer-card__abv">5.8%</span>
+          </div>
+          <h3 class="beer-card__name">FORJA</h3>
+          <p class="beer-card__desc">Malta caramelizada, toque de nuez y final limpio.</p>
+          <div class="beer-card__bar">
+            <div class="beer-card__bar-fill" style="--pct: 55%"></div>
+          </div>
+          <div class="beer-card__ibu">IBU 28 · Lote #052</div>
+        </div>
       </article>
 
-      <article class="cerveza cerveza--wide cerveza--cream">
-        <div class="cerveza__wide-left">
-          <div class="cerveza__meta">
-            <span class="cerveza__style">Session Lager</span>
-            <span class="cerveza__abv">4.2% ABV</span>
-          </div>
-          <h3 class="cerveza__name">MANSA</h3>
-          <p class="cerveza__desc">La cerveza que no intimida. Refrescante, ligera y perfecta para una tarde larga. Nuestra puerta de entrada.</p>
-          <div class="cerveza__ibu">IBU 15 · Lote #061</div>
+      <article class="beer-card" data-abv="4.2">
+        <div class="beer-card__img">
+          <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=600&q=80&auto=format&fit=crop" alt="MANSA Lager" />
         </div>
-        <div class="cerveza__wide-img">
-          <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=500&q=80&auto=format&fit=crop" alt="Mansa Lager" />
+        <div class="beer-card__body">
+          <div class="beer-card__top">
+            <span class="beer-card__style">Session Lager</span>
+            <span class="beer-card__abv">4.2%</span>
+          </div>
+          <h3 class="beer-card__name">MANSA</h3>
+          <p class="beer-card__desc">Refrescante, ligera. La puerta de entrada a CRUDA.</p>
+          <div class="beer-card__bar">
+            <div class="beer-card__bar-fill" style="--pct: 30%"></div>
+          </div>
+          <div class="beer-card__ibu">IBU 15 · Lote #061</div>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- PROCESO -->
-  <section class="proceso" id="proceso">
-    <div class="proceso__inner">
-      <div class="proceso__left">
-        <span class="section-tag">— 03 / Proceso</span>
-        <h2 class="proceso__title">
-          De grano<br/>
-          a <span class="text-outline">vaso.</span>
-        </h2>
-        <p class="proceso__sub">Cada paso importa. Cada decisión se nota en el vaso.</p>
+  <!-- STATS STRIP -->
+  <div class="stats-strip">
+    <div class="stats-strip__inner">
+      <div class="stat-item">
+        <span class="stat-item__num" data-target="12">0</span>
+        <span class="stat-item__label">Estilos en rotación</span>
       </div>
-      <div class="proceso__steps">
-        <div class="proceso-step">
-          <span class="proceso-step__num">01</span>
-          <div class="proceso-step__content">
-            <h3>Selección de ingredientes</h3>
-            <p>Malta, lúpulo, levadura y agua. Solo trabajamos con proveedores locales que conocemos por su nombre.</p>
-          </div>
-        </div>
-        <div class="proceso-step">
-          <span class="proceso-step__num">02</span>
-          <div class="proceso-step__content">
-            <h3>Maceración & Cocción</h3>
-            <p>Control de temperatura al grado. Extracto de malta que define el carácter de cada lote antes de agregar el lúpulo.</p>
-          </div>
-        </div>
-        <div class="proceso-step">
-          <span class="proceso-step__num">03</span>
-          <div class="proceso-step__content">
-            <h3>Fermentación natural</h3>
-            <p>Sin atajos, sin aceleradores. La levadura trabaja a su ritmo. El tiempo es el ingrediente secreto.</p>
-          </div>
-        </div>
-        <div class="proceso-step">
-          <span class="proceso-step__num">04</span>
-          <div class="proceso-step__content">
-            <h3>Guarda & Embotellado</h3>
-            <p>Cada lote descansa hasta que está listo. Lo deciden el sabor y el aroma, no el calendario de producción.</p>
-          </div>
-        </div>
+      <div class="stat-item__sep">✦</div>
+      <div class="stat-item">
+        <span class="stat-item__num" data-target="100">0</span>
+        <span class="stat-item__label">% ingredientes locales</span>
+      </div>
+      <div class="stat-item__sep">✦</div>
+      <div class="stat-item">
+        <span class="stat-item__num" data-target="47">0</span>
+        <span class="stat-item__label">Lotes producidos</span>
+      </div>
+      <div class="stat-item__sep">✦</div>
+      <div class="stat-item">
+        <span class="stat-item__num" data-target="0">0</span>
+        <span class="stat-item__label">Aditivos artificiales</span>
       </div>
     </div>
-    <div class="proceso__img-strip">
-      <img src="https://images.unsplash.com/photo-1532634733-cae1395e440f?w=1400&q=80&auto=format&fit=crop" alt="Proceso de elaboración CRUDA" />
-      <div class="proceso__img-overlay">
-        <span>Planta de elaboración · Coquimbo</span>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- CONTACTO -->
   <section class="contacto" id="contacto">
     <div class="contacto__inner">
       <div class="contacto__left">
-        <span class="section-tag">— 04 / Encuéntranos</span>
+        <span class="section-tag">— Encuéntranos</span>
         <h2 class="contacto__title">
           Ven a<br/>
           <span class="text-outline">probar.</span>
         </h2>
-        <p class="contacto__sub">Abrimos las puertas de la cervecería todos los fines de semana. Sin reserva, sin dress code.</p>
+        <p class="contacto__sub">Abrimos el taproom todos los fines de semana. Sin reserva, sin dress code.</p>
         <div class="contacto__data">
           <div class="contacto__item">
             <span class="contacto__label">Taproom</span>
-            <span>Av. Costanera 820 · Coquimbo, Chile</span>
+            <span>Av. Costanera 820 · Coquimbo</span>
           </div>
           <div class="contacto__item">
             <span class="contacto__label">Teléfono</span>
             <a href="tel:+56987654321">+569 8765 4321</a>
           </div>
           <div class="contacto__item">
-            <span class="contacto__label">Taproom abierto</span>
+            <span class="contacto__label">Horario</span>
             <span>Vie: 18h–24h · Sáb–Dom: 13h–24h</span>
-          </div>
-          <div class="contacto__item">
-            <span class="contacto__label">Distribución</span>
-            <span>contacto@crudacerveceria.cl</span>
           </div>
         </div>
       </div>
       <form class="contacto__form">
-        <p class="form__title">¿Quieres CRUDA en tu bar o restaurante?</p>
+        <p class="form__title">¿Quieres CRUDA en tu local?</p>
         <div class="form-row">
           <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" placeholder="Tu nombre" />
+            <label>Nombre</label>
+            <input type="text" placeholder="Tu nombre" />
           </div>
           <div class="form-group">
-            <label for="tel">Teléfono</label>
-            <input type="tel" id="tel" placeholder="+569 9 1234 5678" />
+            <label>Teléfono</label>
+            <input type="tel" placeholder="+569 9 1234 5678" />
           </div>
         </div>
         <div class="form-group">
-          <label for="negocio">Nombre del negocio</label>
-          <input type="text" id="negocio" placeholder="Tu bar, restaurante o tienda" />
+          <label>Negocio</label>
+          <input type="text" placeholder="Tu bar, restaurante o tienda" />
         </div>
         <div class="form-group">
-          <label for="interes">¿Qué te interesa?</label>
-          <select id="interes">
-            <option value="">Selecciona una opción</option>
+          <label>¿Qué te interesa?</label>
+          <select>
+            <option value="">Selecciona</option>
             <option>Distribución regular</option>
             <option>Evento privado</option>
             <option>Grifo / tirada directa</option>
             <option>Pack degustación</option>
           </select>
-        </div>
-        <div class="form-group">
-          <label for="mensaje">Cuéntanos</label>
-          <textarea id="mensaje" rows="3" placeholder="¿Cuántos litros necesitas? ¿Qué estilos te interesan?"></textarea>
         </div>
         <button type="submit" class="btn btn--amber btn--full">Enviar →</button>
       </form>
