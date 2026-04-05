@@ -262,125 +262,29 @@ ul { list-style: none; }
 .fx-foam.active { opacity: 1; animation: foam-pulse 2s ease-in-out infinite; }
 @keyframes foam-pulse { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.08); } }
 
-/* THE BOTTLE */
-.journey__bottle-container {
+/* THREE.JS CANVAS */
+.journey__three-canvas {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
   z-index: 10;
-  transform: translate(-50%, -50%);
-  perspective: 1000px;
-  will-change: transform;
-}
-
-.bottle {
-  position: relative;
-  width: 220px;
-  height: 520px;
-  transform-origin: center bottom;
-  will-change: transform;
-  transition:
-    transform 0.9s var(--ease-spring),
-    filter 0.7s var(--ease);
-}
-
-/* Bottle silhouette shape */
-.bottle__shape {
-  position: absolute;
-  inset: 0;
-  clip-path: polygon(
-    40% 0%,  60% 0%,
-    62% 2%,  68% 6%,  70% 12%,
-    72% 18%, 74% 22%,
-    76% 28%, 77% 35%,
-    78% 42%, 78% 98%,
-    74% 100%, 26% 100%,
-    22% 98%, 22% 42%,
-    23% 35%, 24% 28%,
-    26% 22%, 28% 18%,
-    30% 12%, 32% 6%,
-    38% 2%
-  );
-  overflow: hidden;
-  border-radius: 0 0 20px 20px;
-}
-.bottle__img {
-  transition: transform 0.9s var(--ease), filter 0.7s var(--ease);
-  transform-origin: center center;
-}
-.bottle__tint {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: background 0.7s var(--ease), opacity 0.5s var(--ease);
-  mix-blend-mode: color;
-}
-
-/* Label */
-.bottle__label {
-  position: absolute;
-  bottom: 28%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 65%;
-  background: rgba(15,14,10,0.85);
-  border: 1px solid rgba(232,160,32,0.4);
-  padding: 0.6rem 0.5rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  backdrop-filter: blur(4px);
-  transition: opacity 0.5s var(--ease);
-}
-.bottle__label-brand {
-  font-family: var(--f-mono);
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--c-amber);
-}
-.bottle__label-name {
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--c-cream);
-  line-height: 1;
-  transition: opacity 0.3s;
-}
-.bottle__label-abv {
-  font-family: var(--f-mono);
-  font-size: 0.5rem;
-  letter-spacing: 0.1em;
-  color: var(--c-grey);
-}
-
-/* Highlight */
-.bottle__highlight {
-  position: absolute;
-  top: 10%;
-  left: 30%;
-  width: 15%;
-  height: 60%;
-  background: linear-gradient(to bottom, rgba(242,236,217,0.15), transparent);
-  border-radius: 50%;
-  filter: blur(6px);
   pointer-events: none;
-  transition: opacity 0.5s;
 }
 
-/* Shadow */
+/* Sombra bajo la botella */
 .bottle__shadow {
   position: absolute;
-  bottom: -30px;
+  bottom: 16%;
   left: 50%;
   transform: translateX(-50%);
   width: 160px;
-  height: 40px;
-  background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%);
-  filter: blur(8px);
+  height: 44px;
+  background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
+  filter: blur(12px);
   transition: width 0.7s var(--ease), opacity 0.5s;
+  pointer-events: none;
+  z-index: 9;
 }
 
 /* Scene text */
@@ -784,5 +688,4 @@ ul { list-style: none; }
   .stat-sep { display: none; }
   .form-row { grid-template-columns: 1fr; }
   .footer__top, .footer__bottom { flex-direction: column; align-items: flex-start; }
-  .bottle { width: 160px; height: 380px; }
 }
