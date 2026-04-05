@@ -99,6 +99,9 @@ camera3.position.set(0, 0, 7);
 // Altura del mundo visible con cámara a z=7 y FOV 30°
 const CAM_WORLD_H = 2 * Math.tan((FOV / 2) * Math.PI / 180) * 7;
 
+// Escala base de la botella (para que se vea prominente con las nuevas proporciones)
+const BASE_BOTTLE_SCALE = 1.2;
+
 function resizeRenderer() {
   const sticky = document.querySelector('.journey__sticky');
   if (!sticky) return;
@@ -129,24 +132,25 @@ scene3.add(backLight);
 
 // ============================================================
 // GEOMETRÍA — BOTELLA (LatheGeometry)
-// Perfil (x, y) girado alrededor del eje Y
+// Perfil (x, y) girado alrededor del eje Y.
+// Proporciones basadas en botella 330ml real (ratio alto/diámetro ~3.4:1)
+// Altura total: 1.86 unidades  ·  Radio cuerpo: 0.270  →  ratio 3.44
 // ============================================================
 const bottleProfile = [
-  new THREE.Vector2(0.000, -1.80),  // centro del fondo (cierra la base)
-  new THREE.Vector2(0.215, -1.80),  // borde del fondo
-  new THREE.Vector2(0.242, -1.68),  // bisel base
-  new THREE.Vector2(0.262, -1.42),  // cuerpo inferior
-  new THREE.Vector2(0.270, -0.80),  // cuerpo medio
-  new THREE.Vector2(0.270,  0.05),  // cuerpo superior
-  new THREE.Vector2(0.263,  0.22),  // inicio hombro
-  new THREE.Vector2(0.246,  0.42),  // hombro medio
-  new THREE.Vector2(0.205,  0.62),  // hombro final
-  new THREE.Vector2(0.145,  0.82),  // base del cuello
-  new THREE.Vector2(0.116,  1.02),  // cuello
-  new THREE.Vector2(0.113,  1.30),  // cuello superior
-  new THREE.Vector2(0.120,  1.38),  // inicio boca
-  new THREE.Vector2(0.110,  1.48),  // boca
-  new THREE.Vector2(0.106,  1.52),  // borde
+  new THREE.Vector2(0.000, -1.00),  // centro del fondo (cierra la base)
+  new THREE.Vector2(0.215, -1.00),  // borde del fondo
+  new THREE.Vector2(0.240, -0.92),  // bisel base
+  new THREE.Vector2(0.262, -0.78),  // cuerpo inferior
+  new THREE.Vector2(0.270, -0.42),  // cuerpo medio
+  new THREE.Vector2(0.270,  0.03),  // cuerpo superior
+  new THREE.Vector2(0.263,  0.13),  // inicio hombro
+  new THREE.Vector2(0.242,  0.25),  // hombro
+  new THREE.Vector2(0.192,  0.37),  // fin hombro
+  new THREE.Vector2(0.118,  0.48),  // base cuello
+  new THREE.Vector2(0.090,  0.58),  // cuello (más fino: ratio 0.33 vs cuerpo)
+  new THREE.Vector2(0.088,  0.74),  // cuello superior
+  new THREE.Vector2(0.096,  0.80),  // inicio boca
+  new THREE.Vector2(0.088,  0.86),  // borde de la boca
 ];
 
 const bottleGeo = new THREE.LatheGeometry(bottleProfile, 80);
@@ -225,10 +229,10 @@ function makeLabelTexture() {
   return new THREE.CanvasTexture(c);
 }
 
-// Cilindro del label (envuelve el cuerpo principal)
+// Cilindro del label (posicionado en el cuerpo principal)
 const labelRadius = 0.274;
 const labelGeo = new THREE.CylinderGeometry(
-  labelRadius, labelRadius, 0.88, 80, 1, true
+  labelRadius, labelRadius, 0.52, 80, 1, true
 );
 const labelMat = new THREE.MeshStandardMaterial({
   map: makeLabelTexture(),
@@ -240,21 +244,21 @@ const labelMat = new THREE.MeshStandardMaterial({
   depthWrite: false,
 });
 const labelMesh = new THREE.Mesh(labelGeo, labelMat);
-labelMesh.position.y = -0.36;
+labelMesh.position.y = -0.35;
 // Rotar para que el centro del label (U=0.5) apunte hacia la cámara (+Z)
 labelMesh.rotation.y = -Math.PI / 2;
 
 // Reflejo de vidrio (franja especular)
-const hlGeo = new THREE.CylinderGeometry(0.278, 0.278, 2.5, 32, 1, true, -0.38, 0.75);
+const hlGeo = new THREE.CylinderGeometry(0.278, 0.278, 1.1, 32, 1, true, -0.38, 0.75);
 const hlMat = new THREE.MeshBasicMaterial({
   color: 0xFFFFFF,
   transparent: true,
-  opacity: 0.04,
+  opacity: 0.05,
   depthWrite: false,
   side: THREE.FrontSide,
 });
 const hlMesh = new THREE.Mesh(hlGeo, hlMat);
-hlMesh.position.y = -0.18;
+hlMesh.position.y = -0.20;
 hlMesh.rotation.y = -0.85;
 
 // ============================================================
@@ -301,7 +305,7 @@ function animate() {
   bottleGroup.rotation.z = t3.rotZ;
   bottleGroup.position.x = t3.posX;
   bottleGroup.position.y = t3.posY;
-  bottleGroup.scale.setScalar(t3.scale);
+  bottleGroup.scale.setScalar(t3.scale * BASE_BOTTLE_SCALE);
 
   labelMesh.material.opacity = t3.labelOp;
 
