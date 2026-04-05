@@ -20,146 +20,103 @@
     <div class="nav__logo">CRUDA<span>®</span></div>
     <ul class="nav__links">
       <li><a href="#catalogo">Cervezas</a></li>
-      <li><a href="#proceso">Proceso</a></li>
       <li><a href="#contacto">Contacto</a></li>
       <li><a href="#contacto" class="nav__cta">Visítanos</a></li>
     </ul>
     <button class="nav__burger" aria-label="Menú"><span></span><span></span></button>
   </nav>
 
-  <!-- INTRO — Fullscreen -->
-  <section class="intro">
-    <div class="intro__bg-text" aria-hidden="true">CRUDA</div>
-    <div class="intro__content">
-      <p class="intro__tag"><span class="tag-blink"></span>Cervecería Artesanal · Coquimbo</p>
-      <h1 class="intro__title">
-        <span class="intro__title-line" data-text="SIN">SIN</span>
-        <span class="intro__title-line intro__title-line--outline" data-text="FILTROS">FILTROS</span>
-        <span class="intro__title-line intro__title-line--amber" data-text="SIN">SIN</span>
-        <span class="intro__title-line" data-text="EXCUSAS">EXCUSAS</span>
-      </h1>
-      <div class="intro__scroll-hint">
-        <span>Scroll para descubrir</span>
-        <div class="scroll-bar"><div class="scroll-bar__fill"></div></div>
+  <!-- ===================================================
+       JOURNEY — Scrollytelling completo
+       La botella es el protagonista de inicio a fin
+  ===================================================== -->
+  <section class="journey" id="journey">
+
+    <!-- Sticky viewport — permanece fijo mientras scrolleas -->
+    <div class="journey__sticky">
+
+      <!-- Fondos por escena (se crossfadean) -->
+      <div class="journey__bg" id="bg-0"></div>
+      <div class="journey__bg" id="bg-1"></div>
+      <div class="journey__bg" id="bg-2"></div>
+      <div class="journey__bg" id="bg-3"></div>
+      <div class="journey__bg" id="bg-4"></div>
+
+      <!-- Efectos de escena (partículas, burbujas, etc.) -->
+      <div class="journey__fx" id="journeyFx">
+        <div class="fx-particles" id="fxParticles">
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="fx-bubbles" id="fxBubbles">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="fx-grain" id="fxGrain"></div>
+        <div class="fx-foam" id="fxFoam"></div>
       </div>
-    </div>
-    <div class="intro__bottle-wrap">
-      <img
-        class="intro__bottle"
-        src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&q=90&auto=format&fit=crop&crop=center"
-        alt="CRUDA cerveza artesanal"
-      />
-      <div class="intro__bottle-glow"></div>
-    </div>
-    <div class="intro__ticker">
-      <div class="ticker__inner">
-        <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
-        <span>SIN FILTROS</span><span class="t-sep">✦</span>
-        <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
-        <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
-        <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
-        <span>CRUDA CERVECERÍA</span><span class="t-sep">✦</span>
-        <span>SIN FILTROS</span><span class="t-sep">✦</span>
-        <span>ARTESANAL · COQUIMBO</span><span class="t-sep">✦</span>
-        <span>FERMENTACIÓN NATURAL</span><span class="t-sep">✦</span>
-        <span>LÚPULO LOCAL</span><span class="t-sep">✦</span>
+
+      <!-- LA BOTELLA -->
+      <div class="journey__bottle-container" id="bottleContainer">
+        <div class="bottle" id="bottle">
+          <!-- Shadow -->
+          <div class="bottle__shadow" id="bottleShadow"></div>
+          <!-- Imagen de la cerveza (reemplazable por PNG transparente) -->
+          <div class="bottle__shape" id="bottleShape">
+            <img
+              src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=600&q=90&auto=format&fit=crop"
+              alt="CRUDA cerveza artesanal"
+              class="bottle__img"
+              id="bottleImg"
+            />
+            <div class="bottle__tint" id="bottleTint"></div>
+          </div>
+          <!-- Label overlay -->
+          <div class="bottle__label" id="bottleLabel">
+            <span class="bottle__label-brand">CRUDA</span>
+            <span class="bottle__label-name" id="labelName">BESTIA</span>
+            <span class="bottle__label-abv" id="labelAbv">7.2% ABV</span>
+          </div>
+          <!-- Highlight reflection -->
+          <div class="bottle__highlight"></div>
+        </div>
       </div>
+
+      <!-- Texto de escena -->
+      <div class="journey__scene-text" id="sceneText">
+        <div class="scene-text" id="sceneContent">
+          <span class="scene-text__num" id="sceneNum">01</span>
+          <h2 class="scene-text__title" id="sceneTitle"></h2>
+          <p class="scene-text__body" id="sceneBody"></p>
+          <div class="scene-text__extra" id="sceneExtra"></div>
+        </div>
+      </div>
+
+      <!-- Ticker inferior -->
+      <div class="journey__bottom-bar">
+        <div class="scene-dots" id="sceneDots">
+          <span class="scene-dot active" data-s="0"></span>
+          <span class="scene-dot" data-s="1"></span>
+          <span class="scene-dot" data-s="2"></span>
+          <span class="scene-dot" data-s="3"></span>
+          <span class="scene-dot" data-s="4"></span>
+        </div>
+        <div class="scene-name-bar" id="sceneNameBar">CRUDA · CERVECERÍA ARTESANAL</div>
+        <div class="scroll-progress-bar">
+          <div class="scroll-progress-fill" id="scrollProgressFill"></div>
+        </div>
+      </div>
+
     </div>
+
+    <!-- Espacio de scroll (500vh para 5 escenas) -->
+    <div class="journey__scroll-space"></div>
+
   </section>
 
-  <!-- SCROLLYTELLING — Botella sticky -->
-  <section class="scrolly">
-
-    <div class="scrolly__bottle-stage">
-      <div class="bottle-wrap">
-        <div class="bottle-glow"></div>
-        <img
-          class="bottle-img"
-          src="https://images.unsplash.com/photo-1535958636474-b021ee887b13?w=500&q=90&auto=format&fit=crop&crop=center"
-          alt="CRUDA"
-        />
-        <div class="bottle-particles">
-          <span></span><span></span><span></span>
-          <span></span><span></span><span></span>
-        </div>
-      </div>
-      <div class="scene-counter">
-        <span class="scene-counter__current">01</span>
-        <span class="scene-counter__sep">/</span>
-        <span class="scene-counter__total">04</span>
-      </div>
-    </div>
-
-    <div class="scrolly__steps">
-
-      <!-- Escena 01 — Origen -->
-      <div class="step" data-scene="1" data-color="#0F0E0A" data-bottle="left">
-        <div class="step__inner">
-          <span class="step__num">01</span>
-          <h2 class="step__title">El<br/><span class="text-outline">origen.</span></h2>
-          <p class="step__body">
-            Empezamos en un garaje con 50 litros, una olla prestada y una obsesión irracional por el sabor. Coquimbo, 2019.
-          </p>
-          <div class="step__detail">
-            <span>Malta local · Lúpulo Cascade</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Escena 02 — Fermentación -->
-      <div class="step" data-scene="2" data-color="#1A0F00" data-bottle="center">
-        <div class="step__inner">
-          <span class="step__num">02</span>
-          <h2 class="step__title">La<br/><span class="text-outline">espera.</span></h2>
-          <p class="step__body">
-            72 horas mínimas de fermentación natural. Sin atajos, sin aceleradores. La levadura trabaja a su propio ritmo.
-          </p>
-          <div class="step__stat-row">
-            <div class="step__stat">
-              <span class="step__stat-num">72h</span>
-              <span class="step__stat-label">Fermentación mínima</span>
-            </div>
-            <div class="step__stat">
-              <span class="step__stat-num">18°C</span>
-              <span class="step__stat-label">Temperatura controlada</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Escena 03 — El carácter -->
-      <div class="step" data-scene="3" data-color="#1C0800" data-bottle="right">
-        <div class="step__inner">
-          <span class="step__num">03</span>
-          <h2 class="step__title">El<br/><span class="text-outline">carácter.</span></h2>
-          <p class="step__body">
-            Cada lote tiene su personalidad. Amargo sin disculpas, dulce sin vergüenza, oscuro sin miedo. Así somos.
-          </p>
-          <div class="step__tags">
-            <span>Amargo</span>
-            <span>Aromático</span>
-            <span>Honesto</span>
-            <span>Sin filtrar</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Escena 04 — El momento -->
-      <div class="step" data-scene="4" data-color="#0A0800" data-bottle="center-large">
-        <div class="step__inner">
-          <span class="step__num">04</span>
-          <h2 class="step__title">Tu<br/><span class="text-amber">momento.</span></h2>
-          <p class="step__body">
-            Sírvela fría. Bébela lento. Compártela con alguien que lo merezca.
-          </p>
-          <a href="#catalogo" class="btn btn--amber">Ver todas las cervezas →</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- CATÁLOGO -->
+  <!-- ===================================================
+       CATÁLOGO
+  ===================================================== -->
   <section class="catalogo" id="catalogo">
     <div class="catalogo__header">
       <span class="section-tag">— El lineup</span>
@@ -167,99 +124,83 @@
     </div>
     <div class="catalogo__grid">
 
-      <article class="beer-card" data-abv="7.2">
+      <article class="beer-card">
         <div class="beer-card__img">
-          <img src="https://images.unsplash.com/photo-1566633806827-ff79a3eb7e25?w=600&q=80&auto=format&fit=crop" alt="BESTIA IPA" />
+          <img src="https://images.unsplash.com/photo-1566633806827-ff79a3eb7e25?w=600&q=80&auto=format&fit=crop" alt="BESTIA" />
+          <div class="beer-card__abv-badge">7.2%</div>
         </div>
         <div class="beer-card__body">
-          <div class="beer-card__top">
-            <span class="beer-card__style">West Coast IPA</span>
-            <span class="beer-card__abv">7.2%</span>
-          </div>
+          <span class="beer-card__style">West Coast IPA</span>
           <h3 class="beer-card__name">BESTIA</h3>
           <p class="beer-card__desc">Lúpulo Cascade y Citra. Amarga sin disculpas.</p>
-          <div class="beer-card__bar">
-            <div class="beer-card__bar-fill" style="--pct: 85%"></div>
-          </div>
-          <div class="beer-card__ibu">IBU 65 · Lote #047</div>
+          <div class="beer-card__bar"><div class="beer-card__bar-fill" style="--pct:85%"></div></div>
+          <span class="beer-card__ibu">IBU 65 · Lote #047</span>
         </div>
       </article>
 
-      <article class="beer-card beer-card--dark" data-abv="9.4">
+      <article class="beer-card beer-card--alt">
         <div class="beer-card__img">
-          <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80&auto=format&fit=crop" alt="SOMBRA Stout" />
+          <img src="https://images.unsplash.com/photo-1608270586620-248524c67de9?w=600&q=80&auto=format&fit=crop" alt="SOMBRA" />
+          <div class="beer-card__abv-badge">9.4%</div>
         </div>
         <div class="beer-card__body">
-          <div class="beer-card__top">
-            <span class="beer-card__style">Imperial Stout</span>
-            <span class="beer-card__abv">9.4%</span>
-          </div>
+          <span class="beer-card__style">Imperial Stout</span>
           <h3 class="beer-card__name">SOMBRA</h3>
-          <p class="beer-card__desc">Café, cacao y vainilla. Densa, oscura, sin pedir perdón.</p>
-          <div class="beer-card__bar">
-            <div class="beer-card__bar-fill" style="--pct: 70%"></div>
-          </div>
-          <div class="beer-card__ibu">IBU 45 · Lote #031</div>
+          <p class="beer-card__desc">Café, cacao y vainilla. Oscura, densa, sin pedir perdón.</p>
+          <div class="beer-card__bar"><div class="beer-card__bar-fill" style="--pct:70%"></div></div>
+          <span class="beer-card__ibu">IBU 45 · Lote #031</span>
         </div>
       </article>
 
-      <article class="beer-card beer-card--amber" data-abv="5.8">
+      <article class="beer-card">
         <div class="beer-card__img">
-          <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&q=80&auto=format&fit=crop" alt="FORJA Amber Ale" />
+          <img src="https://images.unsplash.com/photo-1571613316887-6f8d5cbf7ef7?w=600&q=80&auto=format&fit=crop" alt="FORJA" />
+          <div class="beer-card__abv-badge">5.8%</div>
         </div>
         <div class="beer-card__body">
-          <div class="beer-card__top">
-            <span class="beer-card__style">Amber Ale</span>
-            <span class="beer-card__abv">5.8%</span>
-          </div>
+          <span class="beer-card__style">Amber Ale</span>
           <h3 class="beer-card__name">FORJA</h3>
           <p class="beer-card__desc">Malta caramelizada, toque de nuez y final limpio.</p>
-          <div class="beer-card__bar">
-            <div class="beer-card__bar-fill" style="--pct: 55%"></div>
-          </div>
-          <div class="beer-card__ibu">IBU 28 · Lote #052</div>
+          <div class="beer-card__bar"><div class="beer-card__bar-fill" style="--pct:55%"></div></div>
+          <span class="beer-card__ibu">IBU 28 · Lote #052</span>
         </div>
       </article>
 
-      <article class="beer-card" data-abv="4.2">
+      <article class="beer-card beer-card--alt">
         <div class="beer-card__img">
-          <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=600&q=80&auto=format&fit=crop" alt="MANSA Lager" />
+          <img src="https://images.unsplash.com/photo-1559526324-593bc073d938?w=600&q=80&auto=format&fit=crop" alt="MANSA" />
+          <div class="beer-card__abv-badge">4.2%</div>
         </div>
         <div class="beer-card__body">
-          <div class="beer-card__top">
-            <span class="beer-card__style">Session Lager</span>
-            <span class="beer-card__abv">4.2%</span>
-          </div>
+          <span class="beer-card__style">Session Lager</span>
           <h3 class="beer-card__name">MANSA</h3>
           <p class="beer-card__desc">Refrescante, ligera. La puerta de entrada a CRUDA.</p>
-          <div class="beer-card__bar">
-            <div class="beer-card__bar-fill" style="--pct: 30%"></div>
-          </div>
-          <div class="beer-card__ibu">IBU 15 · Lote #061</div>
+          <div class="beer-card__bar"><div class="beer-card__bar-fill" style="--pct:30%"></div></div>
+          <span class="beer-card__ibu">IBU 15 · Lote #061</span>
         </div>
       </article>
 
     </div>
   </section>
 
-  <!-- STATS STRIP -->
+  <!-- Stats strip -->
   <div class="stats-strip">
     <div class="stats-strip__inner">
       <div class="stat-item">
         <span class="stat-item__num" data-target="12">0</span>
         <span class="stat-item__label">Estilos en rotación</span>
       </div>
-      <div class="stat-item__sep">✦</div>
+      <div class="stat-sep">✦</div>
       <div class="stat-item">
         <span class="stat-item__num" data-target="100">0</span>
         <span class="stat-item__label">% ingredientes locales</span>
       </div>
-      <div class="stat-item__sep">✦</div>
+      <div class="stat-sep">✦</div>
       <div class="stat-item">
         <span class="stat-item__num" data-target="47">0</span>
         <span class="stat-item__label">Lotes producidos</span>
       </div>
-      <div class="stat-item__sep">✦</div>
+      <div class="stat-sep">✦</div>
       <div class="stat-item">
         <span class="stat-item__num" data-target="0">0</span>
         <span class="stat-item__label">Aditivos artificiales</span>
@@ -272,10 +213,7 @@
     <div class="contacto__inner">
       <div class="contacto__left">
         <span class="section-tag">— Encuéntranos</span>
-        <h2 class="contacto__title">
-          Ven a<br/>
-          <span class="text-outline">probar.</span>
-        </h2>
+        <h2 class="contacto__title">Ven a<br/><span class="text-outline">probar.</span></h2>
         <p class="contacto__sub">Abrimos el taproom todos los fines de semana. Sin reserva, sin dress code.</p>
         <div class="contacto__data">
           <div class="contacto__item">
@@ -323,7 +261,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer__top">
       <span class="footer__logo">CRUDA<sup>®</sup></span>
