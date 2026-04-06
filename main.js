@@ -1,66 +1,95 @@
 /* ============================================================
    CRUDA — Cervecería Artesanal
-   Scrollytelling Engine + Three.js Bottle 3D
+   Scrollytelling Cinematográfico · 4 actos
    ============================================================ */
 
 // ============================================================
-// ESCENAS
+// ESCENAS — 4 actos narrativos
+// bottleX/Y en unidades Three.js (no pixels)
+// cameraX/Y/Z: posición de cámara
+// targetX/Y/Z: punto al que mira la cámara
+// fov: campo visual (zoom óptico)
 // ============================================================
 const SCENES = [
   {
-    id: 0, name: 'CRUDA · CERVECERÍA ARTESANAL', bgId: 'bg-0',
-    bottleX: 0, bottleY: 0, bottleScale: 0.85,
-    bottleRotateZ: -5, bottleRotateY: 0,
-    lightScale: 0.55,
-    labelOpacity: 0, shadowWidth: 120, fx: [],
-    num: '00', title: 'CRUDA', titleOutline: false,
-    body: 'Fermentamos con obsesión.\nEmbotellamos con honestidad.\nBebemos sin disculpas.',
-    extra: null, textSide: 'left',
+    id: 0,
+    name: '01 · MISTERIO',
+    bgId: 'bg-0',
+    // Botella: centrada, empujada levemente hacia abajo en pantalla
+    bottleX: 0.05, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: 0, bottleRotateY: 10,
+    labelOpacity: 0, shadowWidth: 50,
+    // Cámara: close-up en cuello y hombro — solo se ve la parte superior
+    cameraX: 0.08, cameraY: 0.52, cameraZ: 1.6,
+    targetX: 0.0,  targetY: 0.48, targetZ: 0.0,
+    fov: 22,
+    // Iluminación
+    ambientInt: 0.25, mainInt: 0.5,
+    rimInt: 2.8,        // rim light fuerte: define el contorno en la oscuridad
+    glowOp: 0.25,
+    // Niebla
+    fogDensity: 0.0,
+    // Texto cinematográfico
+    cinemaText: 'No es solo cerveza.',
+    showCTA: false,
   },
   {
-    id: 1, name: 'ORIGEN · COQUIMBO 2019', bgId: 'bg-1',
-    bottleX: -180, bottleY: 30, bottleScale: 0.9,
-    bottleRotateZ: -18, bottleRotateY: 0,
-    lightScale: 0.70,
-    labelOpacity: 0.6, shadowWidth: 100, fx: ['grain'],
-    num: '01', title: 'EL\nORIGEN.', titleOutline: false,
-    body: 'Un garaje, 50 litros y una obsesión irracional por el sabor. Coquimbo, 2019.',
-    extra: { type: 'tags', items: ['Malta local', 'Lúpulo Cascade', 'Fermentación natural'] },
-    textSide: 'right',
+    id: 1,
+    name: '02 · REVEAL',
+    bgId: 'bg-1',
+    // Botella: centrada, se revela completa
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 0.95,
+    bottleRotateZ: -3, bottleRotateY: 40,
+    labelOpacity: 1.0, shadowWidth: 150,
+    // Cámara: se aleja suavemente, ángulo ¾
+    cameraX: 0.28, cameraY: 0.06, cameraZ: 4.2,
+    targetX: 0.0,  targetY: 0.0,  targetZ: 0.0,
+    fov: 30,
+    ambientInt: 0.7, mainInt: 1.1,
+    rimInt: 0.7,
+    glowOp: 0.55,       // glow cálido en el reveal
+    fogDensity: 0.0,
+    cinemaText: 'Es carácter en estado líquido.',
+    showCTA: false,
   },
   {
-    id: 2, name: 'FERMENTACIÓN · 72 HORAS', bgId: 'bg-2',
-    bottleX: 0, bottleY: -40, bottleScale: 1.1,
+    id: 2,
+    name: '03 · IMPACTO',
+    bgId: 'bg-2',
+    // Botella: frontal, ligeramente elevada
+    bottleX: 0.0, bottleY: -0.08, bottleScale: 1.05,
     bottleRotateZ: 0, bottleRotateY: 180,
-    lightScale: 1.00,
-    labelOpacity: 0, shadowWidth: 160, fx: ['bubbles'],
-    num: '02', title: 'LA\nESPERA.', titleOutline: true,
-    body: '72 horas mínimas. Sin atajos. La levadura trabaja a su ritmo — el tiempo es el ingrediente secreto.',
-    extra: { type: 'stats', items: [{ num: '72h', label: 'Fermentación mínima' }, { num: '18°C', label: 'Temp. controlada' }] },
-    textSide: 'left',
+    labelOpacity: 0.6, shadowWidth: 200,
+    // Cámara: impulso leve hacia delante, ángulo bajo
+    cameraX: 0.12, cameraY: -0.08, cameraZ: 3.4,
+    targetX: 0.0,  targetY: 0.05,  targetZ: 0.0,
+    fov: 34,
+    ambientInt: 0.9, mainInt: 1.3,
+    rimInt: 1.6,        // rim contraluz fuerte
+    glowOp: 0.80,       // glow máximo en el clímax
+    fogDensity: 0.09,   // niebla fría activa
+    cinemaText: 'Fría. Intensa. Lista.',
+    showCTA: false,
   },
   {
-    id: 3, name: 'EL CARÁCTER · SIN DISCULPAS', bgId: 'bg-3',
-    bottleX: 160, bottleY: 20, bottleScale: 1.0,
-    bottleRotateZ: 38, bottleRotateY: 0,
-    lightScale: 1.15,
-    labelOpacity: 1, shadowWidth: 80, fx: ['particles'],
-    num: '03', title: 'EL\nCARÁCTER.', titleOutline: true,
-    body: 'Amargo sin disculpas. Oscuro sin miedo. Cada lote tiene personalidad propia.',
-    extra: { type: 'tags', items: ['Amargo', 'Aromático', 'Sin filtrar', 'Local'] },
-    textSide: 'left',
-  },
-  {
-    id: 4, name: 'TU MOMENTO · SÍRVELA FRÍA', bgId: 'bg-4',
-    bottleX: 0, bottleY: -20, bottleScale: 1.25,
+    id: 3,
+    name: '04 · HERO',
+    bgId: 'bg-3',
+    // Botella: perfectamente centrada, hero final
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
     bottleRotateZ: 0, bottleRotateY: 360,
-    lightScale: 1.30,
-    labelOpacity: 1, shadowWidth: 200, fx: ['foam', 'bubbles'],
-    num: '04', title: 'TU\nMOMENTO.', titleOutline: false,
-    body: 'Sírvela fría. Bébela lento. Compártela con alguien que lo merezca.',
-    extra: { type: 'cta', label: 'Ver todas las cervezas', href: '#catalogo' },
-    textSide: 'left',
-  }
+    labelOpacity: 1.0, shadowWidth: 170,
+    // Cámara: amplia y estable, encuadre limpio
+    cameraX: 0.0,  cameraY: 0.0,  cameraZ: 5.2,
+    targetX: 0.0,  targetY: 0.0,  targetZ: 0.0,
+    fov: 28,
+    ambientInt: 1.0, mainInt: 1.4,
+    rimInt: 0.5,
+    glowOp: 0.40,
+    fogDensity: 0.0,
+    cinemaText: 'Descubre la experiencia.',
+    showCTA: true,
+  },
 ];
 
 // ============================================================
@@ -72,14 +101,25 @@ function easeInOut(t) { return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t; }
 function interpolateScene(A, B, t) {
   const e = easeInOut(t);
   return {
-    bottleX:       lerp(A.bottleX,       B.bottleX,       e),
-    bottleY:       lerp(A.bottleY,       B.bottleY,       e),
-    bottleScale:   lerp(A.bottleScale,   B.bottleScale,   e),
+    bottleX:       lerp(A.bottleX,      B.bottleX,      e),
+    bottleY:       lerp(A.bottleY,      B.bottleY,      e),
+    bottleScale:   lerp(A.bottleScale,  B.bottleScale,  e),
     bottleRotateZ: lerp(A.bottleRotateZ, B.bottleRotateZ, e),
     bottleRotateY: lerp(A.bottleRotateY, B.bottleRotateY, e),
-    shadowWidth:   lerp(A.shadowWidth,   B.shadowWidth,   e),
-    labelOpacity:  lerp(A.labelOpacity,  B.labelOpacity,  e),
-    lightScale:    lerp(A.lightScale,    B.lightScale,    e),
+    labelOpacity:  lerp(A.labelOpacity, B.labelOpacity, e),
+    shadowWidth:   lerp(A.shadowWidth,  B.shadowWidth,  e),
+    cameraX:       lerp(A.cameraX,      B.cameraX,      e),
+    cameraY:       lerp(A.cameraY,      B.cameraY,      e),
+    cameraZ:       lerp(A.cameraZ,      B.cameraZ,      e),
+    targetX:       lerp(A.targetX,      B.targetX,      e),
+    targetY:       lerp(A.targetY,      B.targetY,      e),
+    targetZ:       lerp(A.targetZ,      B.targetZ,      e),
+    fov:           lerp(A.fov,          B.fov,          e),
+    ambientInt:    lerp(A.ambientInt,   B.ambientInt,   e),
+    mainInt:       lerp(A.mainInt,      B.mainInt,      e),
+    rimInt:        lerp(A.rimInt,       B.rimInt,       e),
+    glowOp:        lerp(A.glowOp,       B.glowOp,       e),
+    fogDensity:    lerp(A.fogDensity,   B.fogDensity,   e),
   };
 }
 
@@ -92,15 +132,12 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 renderer.setClearColor(0x000000, 0);
 
 const scene3 = new THREE.Scene();
-const FOV = 30;
-const camera3 = new THREE.PerspectiveCamera(FOV, 1, 0.1, 100);
-camera3.position.set(0, 0, 7);
+const camera3 = new THREE.PerspectiveCamera(22, 1, 0.1, 100);
+camera3.position.set(0.08, 0.52, 1.6);
 
-// Altura del mundo visible con cámara a z=7 y FOV 30°
-const CAM_WORLD_H = 2 * Math.tan((FOV / 2) * Math.PI / 180) * 7;
-
-// Escala base de la botella (para que se vea prominente con las nuevas proporciones)
-const BASE_BOTTLE_SCALE = 1.2;
+// Niebla (densidad 0 = invisible al inicio)
+const sceneFog = new THREE.FogExp2(0x04060C, 0);
+scene3.fog = sceneFog;
 
 function resizeRenderer() {
   const sticky = document.querySelector('.journey__sticky');
@@ -115,36 +152,86 @@ function resizeRenderer() {
 // ============================================================
 // ILUMINACIÓN
 // ============================================================
-// Iluminación ajustada para fondo claro — más ambiente, luz cálida
-const ambientLight = new THREE.AmbientLight(0xFFF5E0, 0.9);
+const ambientLight = new THREE.AmbientLight(0xFFF5E0, 0.25);
 scene3.add(ambientLight);
 
-const mainLight = new THREE.DirectionalLight(0xFFEAB0, 1.4);
+const mainLight = new THREE.DirectionalLight(0xFFEAB0, 0.5);
 mainLight.position.set(-2, 3, 5);
 scene3.add(mainLight);
 
-const rimLight = new THREE.DirectionalLight(0xC8780A, 0.6);
-rimLight.position.set(3, 0.5, 2);
+// Rim light trasero (define contorno en escena de misterio)
+const rimLight = new THREE.DirectionalLight(0xFFCC80, 2.8);
+rimLight.position.set(0.5, 0.5, -3.5);
 scene3.add(rimLight);
 
-const backLight = new THREE.DirectionalLight(0xFFD080, 0.3);
-backLight.position.set(0, -1, -3);
-scene3.add(backLight);
+// Luz lateral cálida
+const sideLight = new THREE.DirectionalLight(0xC8780A, 0.4);
+sideLight.position.set(3, 0, 2);
+scene3.add(sideLight);
+
+// ============================================================
+// GLOW — Sprite ámbar detrás de la botella
+// ============================================================
+const glowCanvas = document.createElement('canvas');
+glowCanvas.width = 256; glowCanvas.height = 256;
+const glowCtx = glowCanvas.getContext('2d');
+const glowGrad = glowCtx.createRadialGradient(128, 128, 0, 128, 128, 128);
+glowGrad.addColorStop(0,   'rgba(200, 120, 10, 0.8)');
+glowGrad.addColorStop(0.35, 'rgba(200, 100, 5, 0.25)');
+glowGrad.addColorStop(1,   'rgba(200, 80, 0, 0)');
+glowCtx.fillStyle = glowGrad;
+glowCtx.fillRect(0, 0, 256, 256);
+const glowTex = new THREE.CanvasTexture(glowCanvas);
+const glowMat = new THREE.SpriteMaterial({
+  map: glowTex,
+  transparent: true,
+  opacity: 0.25,
+  depthWrite: false,
+  blending: THREE.AdditiveBlending,
+});
+const glowSprite = new THREE.Sprite(glowMat);
+glowSprite.scale.set(2.8, 3.5, 1);
+glowSprite.position.set(0, 0, -0.4);
+
+// ============================================================
+// PARTÍCULAS 3D
+// ============================================================
+const PARTICLE_COUNT = 180;
+const pPositions = new Float32Array(PARTICLE_COUNT * 3);
+const pVelocities = new Float32Array(PARTICLE_COUNT);
+for (let i = 0; i < PARTICLE_COUNT; i++) {
+  pPositions[i * 3 + 0] = (Math.random() - 0.5) * 5;
+  pPositions[i * 3 + 1] = (Math.random() - 0.5) * 4;
+  pPositions[i * 3 + 2] = (Math.random() - 0.5) * 2.5;
+  pVelocities[i] = 0.003 + Math.random() * 0.006;
+}
+const particleGeo = new THREE.BufferGeometry();
+particleGeo.setAttribute('position', new THREE.BufferAttribute(pPositions, 3));
+const particleMat = new THREE.PointsMaterial({
+  color: 0xC8780A,
+  size: 0.025,
+  transparent: true,
+  opacity: 0,
+  depthWrite: false,
+  sizeAttenuation: true,
+});
+const particles = new THREE.Points(particleGeo, particleMat);
+scene3.add(particles);
 
 // ============================================================
 // GRUPO BOTELLA + CARGA DEL MODELO GLB
 // ============================================================
 const bottleGroup = new THREE.Group();
+bottleGroup.add(glowSprite);
 scene3.add(bottleGroup);
 
-let labelMesh3D = null; // referencia a Mesh001 para animar opacidad del label
+let labelMesh3D = null;
 
 const texLoader  = new THREE.TextureLoader();
 const gltfLoader = new THREE.GLTFLoader();
 
-// Pre-carga la textura del label
 const labelTex = texLoader.load('./assets/label.png');
-labelTex.flipY = false; // necesario para modelos GLB/GLTF
+labelTex.flipY = false;
 
 console.log('[CRUDA] Cargando Bottle.glb...');
 
@@ -153,208 +240,221 @@ gltfLoader.load('./assets/Bottle.glb',
     console.log('[CRUDA] Bottle.glb cargado ✓');
     const model = gltf.scene;
 
-    // --- Normalizar escala: hacer la botella ~1.9 unidades de alto ---
+    // Normalizar escala y centrar
     const box    = new THREE.Box3().setFromObject(model);
     const size   = box.getSize(new THREE.Vector3());
     const center = box.getCenter(new THREE.Vector3());
     const scaleN = 1.9 / size.y;
     model.scale.setScalar(scaleN);
+    model.position.set(-center.x * scaleN, -center.y * scaleN, -center.z * scaleN);
 
-    // Centrar en el origen (para que el grupo la mueva limpio)
-    model.position.set(
-      -center.x * scaleN,
-      -center.y * scaleN,
-      -center.z * scaleN
-    );
-
-    // --- Aplicar materiales según malla ---
+    // Materiales por malla
     model.traverse((child) => {
       if (!child.isMesh) return;
-
       switch (child.name) {
         case 'Mesh001':
-          // Etiqueta frontal → aplicar label.png
           labelMesh3D = child;
           child.material = new THREE.MeshStandardMaterial({
-            map: labelTex,
-            transparent: true,
-            opacity: 0,
-            roughness: 0.75,
-            metalness: 0.0,
-            side: THREE.FrontSide,
+            map: labelTex, transparent: true, opacity: 0,
+            roughness: 0.75, metalness: 0.0, side: THREE.FrontSide,
           });
           break;
-
         case 'Mesh001_1':
         case 'Mesh001_2':
-          // Etiquetas traseras → ocultar
           child.visible = false;
           break;
-
         case 'Cap':
-          // Tapa → dorado
           child.material = new THREE.MeshPhongMaterial({
-            color:     0xC8960C,
-            specular:  0xFFDD55,
-            shininess: 220,
+            color: 0xC8960C, specular: 0xFFDD55, shininess: 220,
           });
           break;
-
         case 'Bottle':
         default:
-          // Cuerpo de vidrio → conservar material original del GLB
           break;
       }
     });
 
     bottleGroup.add(model);
   },
-  (xhr) => console.log(`[CRUDA] GLB: ${Math.round(xhr.loaded / xhr.total * 100)}%`),
+  null,
   (err) => console.error('[CRUDA] Error cargando Bottle.glb:', err)
 );
 
 // ============================================================
-// ESTADO SUAVIZADO (lerp en el loop de animación)
+// ESTADO SUAVIZADO
 // ============================================================
-let t3 = { rotY: 0, rotZ: 0, posX: 0, posY: 0, scale: 0.85, labelOp: 0, lightScale: 0.55 };
+const S0 = SCENES[0];
+let t3 = {
+  rotY: S0.bottleRotateY * Math.PI / 180,
+  rotZ: S0.bottleRotateZ * Math.PI / 180,
+  posX: S0.bottleX, posY: -S0.bottleY,
+  scale: S0.bottleScale,
+  labelOp: S0.labelOpacity,
+  camX: S0.cameraX, camY: S0.cameraY, camZ: S0.cameraZ,
+  tgtX: S0.targetX, tgtY: S0.targetY, tgtZ: S0.targetZ,
+  fov:  S0.fov,
+  ambientInt: S0.ambientInt,
+  mainInt:    S0.mainInt,
+  rimInt:     S0.rimInt,
+  glowOp:     S0.glowOp,
+  fogDensity: S0.fogDensity,
+};
 let target3 = { ...t3 };
 
 // ============================================================
 // LOOP DE ANIMACIÓN
 // ============================================================
-function animate() {
+let lastTime = 0;
+function animate(time) {
   requestAnimationFrame(animate);
+  const dt = Math.min((time - lastTime) / 1000, 0.05);
+  lastTime = time;
 
-  const lf = 0.075;
+  const lf = 0.07;
+
   t3.rotY       = lerp(t3.rotY,       target3.rotY,       lf);
   t3.rotZ       = lerp(t3.rotZ,       target3.rotZ,       lf);
   t3.posX       = lerp(t3.posX,       target3.posX,       lf);
   t3.posY       = lerp(t3.posY,       target3.posY,       lf);
-  t3.scale      = lerp(t3.scale,      target3.scale,      0.055);
+  t3.scale      = lerp(t3.scale,      target3.scale,      0.05);
   t3.labelOp    = lerp(t3.labelOp,    target3.labelOp,    lf);
-  t3.lightScale = lerp(t3.lightScale, target3.lightScale, 0.04);
+  t3.camX       = lerp(t3.camX,       target3.camX,       0.04);
+  t3.camY       = lerp(t3.camY,       target3.camY,       0.04);
+  t3.camZ       = lerp(t3.camZ,       target3.camZ,       0.04);
+  t3.tgtX       = lerp(t3.tgtX,       target3.tgtX,       0.04);
+  t3.tgtY       = lerp(t3.tgtY,       target3.tgtY,       0.04);
+  t3.tgtZ       = lerp(t3.tgtZ,       target3.tgtZ,       0.04);
+  t3.fov        = lerp(t3.fov,        target3.fov,        0.04);
+  t3.ambientInt = lerp(t3.ambientInt, target3.ambientInt, 0.05);
+  t3.mainInt    = lerp(t3.mainInt,    target3.mainInt,    0.05);
+  t3.rimInt     = lerp(t3.rimInt,     target3.rimInt,     0.05);
+  t3.glowOp     = lerp(t3.glowOp,    target3.glowOp,     0.05);
+  t3.fogDensity = lerp(t3.fogDensity, target3.fogDensity, 0.03);
 
+  // Botella
   bottleGroup.rotation.y = t3.rotY;
   bottleGroup.rotation.z = t3.rotZ;
   bottleGroup.position.x = t3.posX;
   bottleGroup.position.y = t3.posY;
-  bottleGroup.scale.setScalar(t3.scale * BASE_BOTTLE_SCALE);
+  bottleGroup.scale.setScalar(t3.scale * BASE_SCALE);
 
+  // Label
   if (labelMesh3D) labelMesh3D.material.opacity = t3.labelOp;
 
-  // Iluminación dinámica por escena
-  ambientLight.intensity = 0.4  * t3.lightScale;
-  mainLight.intensity    = 1.2  * t3.lightScale;
-  rimLight.intensity     = 0.5  * t3.lightScale;
+  // Cámara — movimiento cinemático con lookAt
+  camera3.position.set(t3.camX, t3.camY, t3.camZ);
+  camera3.lookAt(t3.tgtX, t3.tgtY, t3.tgtZ);
+  if (Math.abs(camera3.fov - t3.fov) > 0.01) {
+    camera3.fov = t3.fov;
+    camera3.updateProjectionMatrix();
+  }
+
+  // Luces
+  ambientLight.intensity = t3.ambientInt;
+  mainLight.intensity    = t3.mainInt;
+  rimLight.intensity     = t3.rimInt;
+
+  // Glow
+  glowMat.opacity = t3.glowOp;
+
+  // Niebla
+  sceneFog.density = t3.fogDensity;
+
+  // Partículas — flotan hacia arriba lentamente
+  const pos = particleGeo.attributes.position;
+  for (let i = 0; i < PARTICLE_COUNT; i++) {
+    pos.array[i * 3 + 1] += pVelocities[i];
+    if (pos.array[i * 3 + 1] > 2.5) {
+      pos.array[i * 3 + 1] = -2.5;
+    }
+  }
+  pos.needsUpdate = true;
+  particleMat.opacity = t3.fogDensity > 0.01
+    ? Math.min(t3.fogDensity * 6, 0.55)
+    : 0;
 
   renderer.render(scene3, camera3);
 }
+
+const BASE_SCALE = 1.15;
 
 // ============================================================
 // DOM REFERENCES
 // ============================================================
 const journeySection     = document.getElementById('journey');
-const sceneText          = document.getElementById('sceneText');
-const sceneContent       = document.getElementById('sceneContent');
-const sceneNum           = document.getElementById('sceneNum');
-const sceneTitle         = document.getElementById('sceneTitle');
-const sceneBody          = document.getElementById('sceneBody');
-const sceneExtra         = document.getElementById('sceneExtra');
+const cinemaOverlay      = document.getElementById('cinemaOverlay');
+const cinemaNumEl        = document.getElementById('cinemaNum');
+const cinemaTextEl       = document.getElementById('cinemaText');
+const cinemaCTAEl        = document.getElementById('cinemaCTA');
 const sceneDots          = document.querySelectorAll('.scene-dot');
 const sceneNameBar       = document.getElementById('sceneNameBar');
 const scrollProgressFill = document.getElementById('scrollProgressFill');
-const fxParticles        = document.getElementById('fxParticles');
-const fxBubbles          = document.getElementById('fxBubbles');
-const fxGrain            = document.getElementById('fxGrain');
-const fxFoam             = document.getElementById('fxFoam');
 const bottleShadowEl     = document.getElementById('bottleShadow');
 
 let currentSceneIndex = -1;
+let textSwitchTimer   = null;
 
 // ============================================================
 // APPLY BOTTLE STATE → actualiza targets Three.js
 // ============================================================
 function applyBottleState(state) {
-  const pxH       = threeCanvas.clientHeight || window.innerHeight;
-  const pxToWorld = CAM_WORLD_H / pxH;
+  target3.posX      =  state.bottleX;
+  target3.posY      = -state.bottleY;
+  target3.scale     =  state.bottleScale;
+  target3.rotZ      =  state.bottleRotateZ * Math.PI / 180;
+  target3.rotY      =  state.bottleRotateY * Math.PI / 180;
+  target3.labelOp   =  state.labelOpacity;
 
-  target3.posX       =  state.bottleX * pxToWorld;
-  target3.posY       = -state.bottleY * pxToWorld; // CSS Y hacia abajo, Three.js Y hacia arriba
-  target3.scale      =  state.bottleScale;
-  target3.rotZ       = -state.bottleRotateZ * Math.PI / 180;
-  target3.rotY       =  state.bottleRotateY * Math.PI / 180; // ← rotación Y real en 3D!
-  target3.labelOp    =  state.labelOpacity;
-  target3.lightScale =  state.lightScale;
+  target3.camX = state.cameraX;
+  target3.camY = state.cameraY;
+  target3.camZ = state.cameraZ;
+  target3.tgtX = state.targetX;
+  target3.tgtY = state.targetY;
+  target3.tgtZ = state.targetZ;
+  target3.fov  = state.fov;
+
+  target3.ambientInt = state.ambientInt;
+  target3.mainInt    = state.mainInt;
+  target3.rimInt     = state.rimInt;
+  target3.glowOp     = state.glowOp;
+  target3.fogDensity = state.fogDensity;
 
   if (bottleShadowEl) {
     bottleShadowEl.style.width   = state.shadowWidth + 'px';
-    bottleShadowEl.style.opacity = state.shadowWidth > 60 ? '1' : '0.3';
+    bottleShadowEl.style.opacity = state.shadowWidth > 60 ? '0.8' : '0.2';
   }
 }
 
 // ============================================================
-// APPLY SCENE (texto, fondos, efectos)
+// APPLY SCENE — textos cinematográficos y fondos
 // ============================================================
 function applyScene(scene) {
   if (currentSceneIndex === scene.id) return;
   currentSceneIndex = scene.id;
 
+  // Fondos
   document.querySelectorAll('.journey__bg').forEach(bg => bg.style.opacity = '0');
   const bg = document.getElementById(scene.bgId);
   if (bg) bg.style.opacity = '1';
 
-  fxParticles.classList.toggle('active', scene.fx.includes('particles'));
-  fxBubbles.classList.toggle('active',   scene.fx.includes('bubbles'));
-  fxGrain.classList.toggle('active',     scene.fx.includes('grain'));
-  fxFoam.classList.toggle('active',      scene.fx.includes('foam'));
-
-  const isLeft = scene.textSide === 'left';
-  sceneText.style.left  = isLeft ? '3rem' : 'auto';
-  sceneText.style.right = isLeft ? 'auto' : '3rem';
-
-  sceneContent.classList.remove('visible');
-  sceneContent.classList.add('entering');
-
-  setTimeout(() => {
-    sceneNum.textContent = scene.num;
-    if (scene.titleOutline) {
-      const lines = scene.title.split('\n');
-      sceneTitle.innerHTML = lines.map((l, i) =>
-        i === lines.length - 1 ? `<span class="text-outline-sm">${l}</span>` : l
-      ).join('<br/>');
-    } else {
-      sceneTitle.innerHTML = scene.title.split('\n').join('<br/>');
-    }
-    sceneBody.textContent = scene.body;
-
-    sceneExtra.innerHTML = '';
-    if (scene.extra) {
-      if (scene.extra.type === 'stats') {
-        const row = document.createElement('div');
-        row.className = 'scene-stats';
-        scene.extra.items.forEach(s => {
-          row.innerHTML += `<div class="scene-stat"><span class="scene-stat__num">${s.num}</span><span class="scene-stat__label">${s.label}</span></div>`;
-        });
-        sceneExtra.appendChild(row);
-      } else if (scene.extra.type === 'tags') {
-        const wrap = document.createElement('div');
-        wrap.className = 'scene-tags';
-        scene.extra.items.forEach(t => { wrap.innerHTML += `<span>${t}</span>`; });
-        sceneExtra.appendChild(wrap);
-      } else if (scene.extra.type === 'cta') {
-        const wrap = document.createElement('div');
-        wrap.className = 'scene-cta';
-        wrap.innerHTML = `<a href="${scene.extra.href}">${scene.extra.label} →</a>`;
-        sceneExtra.appendChild(wrap);
-      }
-    }
-
-    sceneContent.classList.remove('entering');
-    sceneContent.classList.add('visible');
-  }, 200);
-
+  // Dots y nombre
   sceneDots.forEach((dot, i) => dot.classList.toggle('active', i === scene.id));
   sceneNameBar.textContent = scene.name;
+
+  // Texto cinematográfico — transición out → in
+  if (textSwitchTimer) clearTimeout(textSwitchTimer);
+
+  cinemaTextEl.classList.remove('visible');
+  cinemaTextEl.classList.add('exiting');
+  cinemaCTAEl.classList.remove('visible');
+  cinemaNumEl.textContent = scene.name.split('·')[0].trim();
+
+  textSwitchTimer = setTimeout(() => {
+    cinemaTextEl.textContent = scene.cinemaText;
+    cinemaTextEl.classList.remove('exiting');
+    cinemaTextEl.classList.add('visible');
+    if (scene.showCTA) cinemaCTAEl.classList.add('visible');
+  }, 350);
 }
 
 // ============================================================
@@ -379,6 +479,7 @@ function onScroll() {
   const sceneA = SCENES[sceneIndex];
   const sceneB = SCENES[sceneIndex + 1];
 
+  // Cambio de escena dominante al 35% de la transición
   const dominantScene = sceneT > 0.35 ? sceneB : sceneA;
   applyScene(dominantScene);
 
@@ -396,17 +497,14 @@ let mx = 0, my = 0, rx = 0, ry = 0;
 if (cursorDot && cursorRing) {
   document.addEventListener('mousemove', e => {
     mx = e.clientX; my = e.clientY;
-    cursorDot.style.left = mx + 'px';
-    cursorDot.style.top  = my + 'px';
+    cursorDot.style.left = mx + 'px'; cursorDot.style.top = my + 'px';
   });
   (function followCursor() {
-    rx += (mx - rx) * 0.1;
-    ry += (my - ry) * 0.1;
-    cursorRing.style.left = rx + 'px';
-    cursorRing.style.top  = ry + 'px';
+    rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1;
+    cursorRing.style.left = rx + 'px'; cursorRing.style.top = ry + 'px';
     requestAnimationFrame(followCursor);
   })();
-  document.querySelectorAll('a, button, .beer-card, .scene-tags span, .scene-dot').forEach(el => {
+  document.querySelectorAll('a, button, .beer-card, .scene-dot').forEach(el => {
     el.addEventListener('mouseenter', () => { cursorDot.classList.add('big'); cursorRing.classList.add('big'); });
     el.addEventListener('mouseleave', () => { cursorDot.classList.remove('big'); cursorRing.classList.remove('big'); });
   });
@@ -417,12 +515,14 @@ if (cursorDot && cursorRing) {
 // ============================================================
 function init() {
   resizeRenderer();
-  animate();
+  requestAnimationFrame(animate);
   onScroll();
+  // Mostrar texto inicial
   setTimeout(() => {
-    sceneContent.classList.remove('entering');
-    sceneContent.classList.add('visible');
-  }, 300);
+    cinemaTextEl.textContent = SCENES[0].cinemaText;
+    cinemaTextEl.classList.add('visible');
+    cinemaNumEl.textContent = SCENES[0].name.split('·')[0].trim();
+  }, 400);
 }
 
 window.addEventListener('scroll', onScroll, { passive: true });
@@ -449,34 +549,25 @@ function countUp(el, target, duration = 1500) {
   const start = Date.now();
   const tick = () => {
     const t = Math.min((Date.now() - start) / duration, 1);
-    const e = 1 - Math.pow(1 - t, 3);
-    el.textContent = Math.round(e * target);
+    el.textContent = Math.round((1 - Math.pow(1 - t, 3)) * target);
     if (t < 1) requestAnimationFrame(tick);
   };
   tick();
 }
 const statNums = document.querySelectorAll('.stat-item__num[data-target]');
 const statsObs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      countUp(entry.target, parseInt(entry.target.dataset.target));
-      statsObs.unobserve(entry.target);
-    }
+  entries.forEach(e => {
+    if (e.isIntersecting) { countUp(e.target, parseInt(e.target.dataset.target)); statsObs.unobserve(e.target); }
   });
 }, { threshold: 0.5 });
 statNums.forEach(el => statsObs.observe(el));
 
 // ============================================================
-// BEER CARD BAR ANIMATION
+// BEER CARD ANIMATION
 // ============================================================
 const beerCards = document.querySelectorAll('.beer-card');
 const cardObs = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animated');
-      cardObs.unobserve(entry.target);
-    }
-  });
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('animated'); cardObs.unobserve(e.target); } });
 }, { threshold: 0.3 });
 beerCards.forEach(card => cardObs.observe(card));
 
@@ -492,12 +583,12 @@ if (burger && navLinks) {
     if (!open) {
       Object.assign(navLinks.style, {
         position: 'fixed', top: '65px', left: '0', right: '0',
-        background: 'rgba(15,14,10,0.98)', flexDirection: 'column',
-        gap: '0', borderBottom: '2px solid rgba(242,236,217,0.12)',
+        background: 'rgba(8,6,4,0.98)', flexDirection: 'column',
+        gap: '0', borderBottom: '1px solid rgba(245,238,216,0.08)',
         backdropFilter: 'blur(20px)'
       });
       [...navLinks.querySelectorAll('a')].forEach(a => {
-        Object.assign(a.style, { padding: '1rem 2rem', display: 'block', cursor: 'pointer' });
+        Object.assign(a.style, { padding: '1rem 2rem', display: 'block', color: '#F5EED8' });
       });
     }
   });
@@ -513,13 +604,7 @@ if (form) {
     const btn = form.querySelector('button[type="submit"]');
     const orig = btn.textContent;
     btn.textContent = 'Enviado. Nos ponemos en contacto ✓';
-    btn.style.background = '#F2ECD9';
-    btn.style.color = '#0F0E0A';
-    setTimeout(() => {
-      btn.textContent = orig;
-      btn.style.background = '';
-      btn.style.color = '';
-      form.reset();
-    }, 3500);
+    btn.style.background = '#F5EED8'; btn.style.color = '#0A0806';
+    setTimeout(() => { btn.textContent = orig; btn.style.background = ''; btn.style.color = ''; form.reset(); }, 3500);
   });
 }

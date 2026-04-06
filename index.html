@@ -35,52 +35,32 @@
     <!-- Sticky viewport — permanece fijo mientras scrolleas -->
     <div class="journey__sticky">
 
-      <!-- Fondos por escena (se crossfadean) -->
+      <!-- Fondos por escena (crossfade) -->
       <div class="journey__bg" id="bg-0"></div>
       <div class="journey__bg" id="bg-1"></div>
       <div class="journey__bg" id="bg-2"></div>
       <div class="journey__bg" id="bg-3"></div>
-      <div class="journey__bg" id="bg-4"></div>
-
-      <!-- Efectos de escena (partículas, burbujas, etc.) -->
-      <div class="journey__fx" id="journeyFx">
-        <div class="fx-particles" id="fxParticles">
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div class="fx-bubbles" id="fxBubbles">
-          <span></span><span></span><span></span><span></span><span></span>
-        </div>
-        <div class="fx-grain" id="fxGrain"></div>
-        <div class="fx-foam" id="fxFoam"></div>
-      </div>
 
       <!-- LA BOTELLA 3D (Three.js) -->
       <canvas class="journey__three-canvas" id="bottleCanvas"></canvas>
-      <!-- Sombra bajo la botella -->
       <div class="bottle__shadow" id="bottleShadow"></div>
 
-      <!-- Texto de escena -->
-      <div class="journey__scene-text" id="sceneText">
-        <div class="scene-text" id="sceneContent">
-          <span class="scene-text__num" id="sceneNum">01</span>
-          <h2 class="scene-text__title" id="sceneTitle"></h2>
-          <p class="scene-text__body" id="sceneBody"></p>
-          <div class="scene-text__extra" id="sceneExtra"></div>
-        </div>
+      <!-- Overlay cinematográfico de texto -->
+      <div class="cinema-overlay" id="cinemaOverlay">
+        <span class="cinema-overlay__num" id="cinemaNum">01</span>
+        <p class="cinema-overlay__text" id="cinemaText">No es solo cerveza.</p>
+        <a class="cinema-overlay__cta" id="cinemaCTA" href="#catalogo">Explorar →</a>
       </div>
 
-      <!-- Ticker inferior -->
+      <!-- Barra inferior -->
       <div class="journey__bottom-bar">
         <div class="scene-dots" id="sceneDots">
-          <span class="scene-dot active" data-s="0"></span>
-          <span class="scene-dot" data-s="1"></span>
-          <span class="scene-dot" data-s="2"></span>
-          <span class="scene-dot" data-s="3"></span>
-          <span class="scene-dot" data-s="4"></span>
+          <span class="scene-dot active"></span>
+          <span class="scene-dot"></span>
+          <span class="scene-dot"></span>
+          <span class="scene-dot"></span>
         </div>
-        <div class="scene-name-bar" id="sceneNameBar">CRUDA · CERVECERÍA ARTESANAL</div>
+        <div class="scene-name-bar" id="sceneNameBar">01 · MISTERIO</div>
         <div class="scroll-progress-bar">
           <div class="scroll-progress-fill" id="scrollProgressFill"></div>
         </div>

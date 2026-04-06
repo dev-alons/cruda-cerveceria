@@ -135,10 +135,13 @@ ul { list-style: none; }
 .nav__burger span { display: block; width: 24px; height: 2px; background: var(--c-cream); }
 
 /* ===========================================================
-   JOURNEY — SCROLLYTELLING
+   JOURNEY — SCROLLYTELLING CINEMATOGRÁFICO
+   La sección intro es oscura premium para que la botella brille.
+   El resto del sitio queda en tono claro.
    =========================================================== */
 .journey {
   position: relative;
+  background: #080604;
 }
 .journey__scroll-space {
   height: 500vh;
@@ -152,112 +155,104 @@ ul { list-style: none; }
   overflow: hidden;
 }
 
-/* Scene backgrounds — tonos cálidos claros */
+/* Scene backgrounds — oscuro premium cinematográfico */
 .journey__bg {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.9s var(--ease);
+  transition: opacity 1s var(--ease);
   z-index: 0;
 }
+/* Escena 1: Misterio — casi negro, toque cálido */
 #bg-0 {
-  background: radial-gradient(ellipse at 60% 50%, #FFF9EC 0%, #F5EED8 70%);
+  background: radial-gradient(ellipse at 55% 45%, #1A0E06 0%, #080604 75%);
   opacity: 1;
 }
+/* Escena 2: Reveal — cálido oscuro con glow ámbar */
 #bg-1 {
-  background: radial-gradient(ellipse at 30% 60%, #FFEDD0 0%, #F5EED8 65%);
+  background: radial-gradient(ellipse at 40% 50%, #2A1408 0%, #0A0806 65%);
 }
+/* Escena 3: Impacto frío — azul muy oscuro para contraste */
 #bg-2 {
-  background: radial-gradient(ellipse at 50% 80%, #FFF2DC 0%, #F0E9D0 70%);
+  background: radial-gradient(ellipse at 50% 60%, #060A10 0%, #04060C 80%);
 }
+/* Escena 4: Hero final — oscuro cálido, limpio */
 #bg-3 {
-  background: radial-gradient(ellipse at 70% 40%, #FFF5D8 0%, #F2EBD0 60%);
-}
-#bg-4 {
-  background:
-    radial-gradient(ellipse at 50% 50%, #FFFBF0 0%, #F5EED8 65%),
-    linear-gradient(to bottom, #F5EED8, #FFF4DC);
+  background: radial-gradient(ellipse at 50% 50%, #160E04 0%, #0A0806 70%);
 }
 
-/* Scene FX */
-.journey__fx { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
-
-.fx-particles span {
+/* ============================================================
+   OVERLAY CINEMATOGRÁFICO
+   ============================================================ */
+.cinema-overlay {
   position: absolute;
-  width: 4px; height: 4px;
-  background: var(--c-amber);
-  border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.4s;
+  bottom: 15%;
+  left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 2rem;
 }
-.fx-particles.active span {
+.cinema-overlay__num {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--c-amber);
+  opacity: 0.7;
+  transition: opacity 0.6s var(--ease);
+}
+.cinema-overlay__text {
+  font-weight: 700;
+  font-size: clamp(1.8rem, 4vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #F5EED8;
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.cinema-overlay__text.visible {
   opacity: 1;
-  animation: float-up 3s ease-in-out infinite;
+  transform: translateY(0);
 }
-.fx-particles span:nth-child(1)  { left: 20%; top: 80%; animation-delay: 0s;    animation-duration: 2.8s; }
-.fx-particles span:nth-child(2)  { left: 35%; top: 85%; animation-delay: 0.4s;  animation-duration: 3.2s; }
-.fx-particles span:nth-child(3)  { left: 50%; top: 78%; animation-delay: 0.8s;  animation-duration: 2.5s; }
-.fx-particles span:nth-child(4)  { left: 65%; top: 82%; animation-delay: 1.2s;  animation-duration: 3.5s; }
-.fx-particles span:nth-child(5)  { left: 75%; top: 86%; animation-delay: 0.2s;  animation-duration: 2.9s; }
-.fx-particles span:nth-child(6)  { left: 25%; top: 75%; animation-delay: 1.6s;  animation-duration: 3.1s; }
-.fx-particles span:nth-child(7)  { left: 45%; top: 88%; animation-delay: 0.6s;  animation-duration: 2.7s; }
-.fx-particles span:nth-child(8)  { left: 55%; top: 76%; animation-delay: 1.0s;  animation-duration: 3.3s; }
-.fx-particles span:nth-child(9)  { left: 30%; top: 90%; animation-delay: 1.8s;  animation-duration: 2.6s; }
-.fx-particles span:nth-child(10) { left: 60%; top: 84%; animation-delay: 0.3s;  animation-duration: 3.0s; }
-.fx-particles span:nth-child(11) { left: 70%; top: 79%; animation-delay: 1.4s;  animation-duration: 3.4s; }
-.fx-particles span:nth-child(12) { left: 40%; top: 92%; animation-delay: 0.9s;  animation-duration: 2.4s; }
-
-@keyframes float-up {
-  0%   { transform: translateY(0) scale(1); opacity: 0.7; }
-  50%  { transform: translateY(-60px) scale(1.3); opacity: 0.4; }
-  100% { transform: translateY(-120px) scale(0.5); opacity: 0; }
-}
-
-.fx-bubbles span {
-  position: absolute;
-  border: 1.5px solid rgba(200,120,10,0.3);
-  border-radius: 50%;
+.cinema-overlay__text.exiting {
   opacity: 0;
-  transition: opacity 0.4s;
+  transform: translateY(-16px);
+  transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
 }
-.fx-bubbles.active span { opacity: 1; animation: bubble-rise 4s ease-in infinite; }
-.fx-bubbles span:nth-child(1) { width:12px; height:12px; left:45%; bottom:0; animation-delay:0s;    animation-duration:3.5s; }
-.fx-bubbles span:nth-child(2) { width:20px; height:20px; left:50%; bottom:0; animation-delay:0.7s;  animation-duration:4.2s; }
-.fx-bubbles span:nth-child(3) { width: 8px; height: 8px; left:55%; bottom:0; animation-delay:1.4s;  animation-duration:3.8s; }
-.fx-bubbles span:nth-child(4) { width:16px; height:16px; left:48%; bottom:0; animation-delay:2.1s;  animation-duration:4.5s; }
-.fx-bubbles span:nth-child(5) { width:10px; height:10px; left:52%; bottom:0; animation-delay:0.4s;  animation-duration:3.2s; }
-
-@keyframes bubble-rise {
-  0%   { transform: translateY(0) translateX(0) scale(1);    opacity: 0.5; }
-  50%  { transform: translateY(-40vh) translateX(10px) scale(1.1); opacity: 0.3; }
-  100% { transform: translateY(-90vh) translateX(-5px) scale(0.7); opacity: 0; }
-}
-
-.fx-grain {
-  position: absolute;
-  inset: 0;
-  background-image:
-    radial-gradient(circle at 20% 70%, rgba(200,120,10,0.06) 0%, transparent 40%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+.cinema-overlay__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--f-mono);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 2.2rem;
+  background: var(--c-amber);
+  color: #080604;
+  border: 2px solid var(--c-amber);
+  box-shadow: 5px 5px 0 rgba(200,120,10,0.3);
+  cursor: pointer;
+  pointer-events: all;
   opacity: 0;
-  transition: opacity 0.8s;
+  transform: translateY(12px);
+  transition: opacity 0.6s 0.2s var(--ease), transform 0.6s 0.2s var(--ease), box-shadow 0.15s, transform 0.15s;
 }
-.fx-grain.active { opacity: 1; }
-
-.fx-foam {
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 300px;
-  height: 80px;
-  background: radial-gradient(ellipse, rgba(200,120,10,0.1) 0%, transparent 70%);
-  opacity: 0;
-  filter: blur(10px);
-  transition: opacity 0.5s;
+.cinema-overlay__cta.visible {
+  opacity: 1;
+  transform: translateY(0);
 }
-.fx-foam.active { opacity: 1; animation: foam-pulse 2s ease-in-out infinite; }
-@keyframes foam-pulse { 0%,100% { transform: translateX(-50%) scale(1); } 50% { transform: translateX(-50%) scale(1.08); } }
+.cinema-overlay__cta:hover {
+  box-shadow: 2px 2px 0 rgba(200,120,10,0.3);
+  transform: translate(3px, 3px);
+}
 
 /* THREE.JS CANVAS */
 .journey__three-canvas {
@@ -277,8 +272,8 @@ ul { list-style: none; }
   transform: translateX(-50%);
   width: 160px;
   height: 44px;
-  background: radial-gradient(ellipse, rgba(28,20,8,0.25) 0%, transparent 70%);
-  filter: blur(12px);
+  background: radial-gradient(ellipse, rgba(0,0,0,0.7) 0%, transparent 70%);
+  filter: blur(14px);
   transition: width 0.7s var(--ease), opacity 0.5s;
   pointer-events: none;
   z-index: 9;
@@ -396,7 +391,7 @@ ul { list-style: none; }
 }
 .scene-cta a:hover { box-shadow: 2px 2px 0 var(--c-amber); transform: translate(4px,4px); }
 
-/* Bottom bar */
+/* Bottom bar — contexto oscuro (dentro de .journey) */
 .journey__bottom-bar {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -405,15 +400,15 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 3rem;
-  border-top: 1px solid rgba(28,23,16,0.08);
-  background: rgba(245,238,216,0.75);
+  border-top: 1px solid rgba(245,238,216,0.06);
+  background: rgba(8,6,4,0.5);
   backdrop-filter: blur(10px);
 }
 .scene-dots { display: flex; gap: 0.6rem; align-items: center; }
 .scene-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(28,23,16,0.2);
+  background: rgba(245,238,216,0.2);
   transition: background 0.3s, transform 0.3s;
 }
 .scene-dot.active {
@@ -425,12 +420,12 @@ ul { list-style: none; }
   font-size: 0.7rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--c-grey);
+  color: rgba(245,238,216,0.4);
   transition: color 0.3s;
 }
 .scroll-progress-bar {
   width: 120px; height: 2px;
-  background: rgba(28,23,16,0.1);
+  background: rgba(245,238,216,0.08);
   overflow: hidden;
 }
 .scroll-progress-fill {
