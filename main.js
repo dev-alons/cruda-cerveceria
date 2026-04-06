@@ -166,6 +166,11 @@ gltfLoader.load('./assets/Bottle.glb',
       -center.z * scaleN
     );
 
+    // --- Listar todas las mallas para diagnóstico ---
+    model.traverse((child) => {
+      if (child.isMesh) console.log('[CRUDA] malla:', child.name, '| material:', child.material?.name || child.material?.type);
+    });
+
     // --- Aplicar materiales según malla ---
     model.traverse((child) => {
       if (!child.isMesh) return;
