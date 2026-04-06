@@ -15,21 +15,18 @@ const SCENES = [
     id: 0,
     name: '01 · MISTERIO',
     bgId: 'bg-0',
-    // Botella: centrada, empujada levemente hacia abajo en pantalla
-    bottleX: 0.05, bottleY: 0.0, bottleScale: 1.0,
-    bottleRotateZ: 0, bottleRotateY: 10,
-    labelOpacity: 0, shadowWidth: 50,
-    // Cámara: close-up en cuello y hombro — solo se ve la parte superior
-    cameraX: 0.08, cameraY: 0.52, cameraZ: 1.6,
-    targetX: 0.0,  targetY: 0.48, targetZ: 0.0,
-    fov: 22,
-    // Iluminación
-    ambientInt: 0.25, mainInt: 0.5,
-    rimInt: 2.8,        // rim light fuerte: define el contorno en la oscuridad
-    glowOp: 0.25,
-    // Niebla
+    // Botella entera visible pero oscura — lejos, silueteada, sin revelar
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: -3, bottleRotateY: -25,
+    labelOpacity: 0, shadowWidth: 30,
+    // Cámara lejana — ve la botella completa, pequeña en el encuadre
+    cameraX: 0.0, cameraY: 0.1, cameraZ: 6.8,
+    targetX: 0.0, targetY: 0.0, targetZ: 0.0,
+    fov: 26,
+    ambientInt: 0.12, mainInt: 0.2,
+    rimInt: 2.2,        // silueta definida por contraluz
+    glowOp: 0.12,
     fogDensity: 0.0,
-    // Texto cinematográfico
     cinemaText: 'No es solo cerveza.',
     showCTA: false,
   },
@@ -37,37 +34,37 @@ const SCENES = [
     id: 1,
     name: '02 · REVEAL',
     bgId: 'bg-1',
-    // Botella: centrada, se revela completa
-    bottleX: 0.0, bottleY: 0.0, bottleScale: 0.95,
-    bottleRotateZ: -3, bottleRotateY: 40,
-    labelOpacity: 1.0, shadowWidth: 150,
-    // Cámara: se aleja suavemente, ángulo ¾
-    cameraX: 0.28, cameraY: 0.06, cameraZ: 4.2,
-    targetX: 0.0,  targetY: 0.0,  targetZ: 0.0,
-    fov: 30,
-    ambientInt: 0.7, mainInt: 1.1,
-    rimInt: 0.7,
-    glowOp: 0.55,       // glow cálido en el reveal
+    // Cámara se acerca — primer plano de la etiqueta frontal
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: 0, bottleRotateY: 0,
+    labelOpacity: 1.0, shadowWidth: 100,
+    // Dolly in: cámara muy cerca, centrada en la etiqueta
+    cameraX: 0.0, cameraY: 0.05, cameraZ: 2.4,
+    targetX: 0.0, targetY: 0.0, targetZ: 0.0,
+    fov: 22,
+    ambientInt: 0.75, mainInt: 1.2,
+    rimInt: 0.3,
+    glowOp: 0.55,
     fogDensity: 0.0,
     cinemaText: 'Es carácter en estado líquido.',
     showCTA: false,
   },
   {
     id: 2,
-    name: '03 · IMPACTO',
+    name: '03 · FRÍO',
     bgId: 'bg-2',
-    // Botella: frontal, ligeramente elevada
-    bottleX: 0.0, bottleY: -0.08, bottleScale: 1.05,
-    bottleRotateZ: 0, bottleRotateY: 180,
-    labelOpacity: 0.6, shadowWidth: 200,
-    // Cámara: impulso leve hacia delante, ángulo bajo
-    cameraX: 0.12, cameraY: -0.08, cameraZ: 3.4,
-    targetX: 0.0,  targetY: 0.05,  targetZ: 0.0,
-    fov: 34,
-    ambientInt: 0.9, mainInt: 1.3,
-    rimInt: 1.6,        // rim contraluz fuerte
-    glowOp: 0.80,       // glow máximo en el clímax
-    fogDensity: 0.09,   // niebla fría activa
+    // Cámara se aleja — toma baja y dramática, niebla fría sube desde el piso
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: 0, bottleRotateY: 20,
+    labelOpacity: 0.9, shadowWidth: 200,
+    // Ángulo bajo dramático — como si estuvieras mirando la botella desde abajo
+    cameraX: 0.15, cameraY: -0.6, cameraZ: 4.2,
+    targetX: 0.0, targetY: 0.3, targetZ: 0.0,
+    fov: 30,
+    ambientInt: 0.45, mainInt: 0.85,
+    rimInt: 2.5,         // contraluz fuerte — halo alrededor de la botella
+    glowOp: 0.90,        // glow en su punto máximo
+    fogDensity: 0.07,    // niebla fría visible
     cinemaText: 'Fría. Intensa. Lista.',
     showCTA: false,
   },
@@ -75,17 +72,17 @@ const SCENES = [
     id: 3,
     name: '04 · HERO',
     bgId: 'bg-3',
-    // Botella: perfectamente centrada, hero final
+    // Encuadre final limpio — botella perfecta, iluminada, CTA visible
     bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
-    bottleRotateZ: 0, bottleRotateY: 360,
-    labelOpacity: 1.0, shadowWidth: 170,
-    // Cámara: amplia y estable, encuadre limpio
-    cameraX: 0.0,  cameraY: 0.0,  cameraZ: 5.2,
-    targetX: 0.0,  targetY: 0.0,  targetZ: 0.0,
-    fov: 28,
-    ambientInt: 1.0, mainInt: 1.4,
-    rimInt: 0.5,
-    glowOp: 0.40,
+    bottleRotateZ: 0, bottleRotateY: 20,
+    labelOpacity: 1.0, shadowWidth: 150,
+    // Cámara ligeramente lateral — encuadre de producto premium
+    cameraX: 0.5, cameraY: 0.15, cameraZ: 5.0,
+    targetX: 0.0, targetY: 0.0, targetZ: 0.0,
+    fov: 24,
+    ambientInt: 1.0, mainInt: 1.6,
+    rimInt: 0.55,
+    glowOp: 0.30,
     fogDensity: 0.0,
     cinemaText: 'Descubre la experiencia.',
     showCTA: true,
