@@ -166,38 +166,43 @@ gltfLoader.load('./assets/Bottle.glb',
       -center.z * scaleN
     );
 
-    // --- Listar todas las mallas para diagnóstico ---
-    model.traverse((child) => {
-      if (child.isMesh) console.log('[CRUDA] malla:', child.name, '| material:', child.material?.name || child.material?.type);
-    });
-
     // --- Aplicar materiales según malla ---
     model.traverse((child) => {
       if (!child.isMesh) return;
 
-      if (child.name === 'Mesh001') {
-        // Etiqueta frontal → aplicar label.png
-        labelMesh3D = child;
-        child.material = new THREE.MeshStandardMaterial({
-          map: labelTex,
-          transparent: true,
-          opacity: 0,       // empieza invisible, el scroll lo anima
-          roughness: 0.75,
-          metalness: 0.0,
-          side: THREE.FrontSide,
-        });
+      switch (child.name) {
+        case 'Mesh001':
+          // Etiqueta frontal → aplicar label.png
+          labelMesh3D = child;
+          child.material = new THREE.MeshStandardMaterial({
+            map: labelTex,
+            transparent: true,
+            opacity: 0,
+            roughness: 0.75,
+            metalness: 0.0,
+            side: THREE.FrontSide,
+          });
+          break;
 
-      } else if (child.name === 'Mesh001_1') {
-        // Etiqueta trasera → ocultar
-        child.visible = false;
+        case 'Mesh001_1':
+        case 'Mesh001_2':
+          // Etiquetas traseras → ocultar
+          child.visible = false;
+          break;
 
-      } else {
-        // Tapa u otras mallas → color dorado
-        child.material = new THREE.MeshPhongMaterial({
-          color:    0xC8960C,
-          specular: 0xFFCC44,
-          shininess: 200,
-        });
+        case 'Cap':
+          // Tapa → dorado
+          child.material = new THREE.MeshPhongMaterial({
+            color:     0xC8960C,
+            specular:  0xFFDD55,
+            shininess: 220,
+          });
+          break;
+
+        case 'Bottle':
+        default:
+          // Cuerpo de vidrio → conservar material original del GLB
+          break;
       }
     });
 
