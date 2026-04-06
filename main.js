@@ -115,19 +115,20 @@ function resizeRenderer() {
 // ============================================================
 // ILUMINACIÓN
 // ============================================================
-const ambientLight = new THREE.AmbientLight(0xF2ECD9, 0.4);
+// Iluminación ajustada para fondo claro — más ambiente, luz cálida
+const ambientLight = new THREE.AmbientLight(0xFFF5E0, 0.9);
 scene3.add(ambientLight);
 
-const mainLight = new THREE.DirectionalLight(0xFFE8C0, 1.2);
-mainLight.position.set(-1.5, 2.5, 4);
+const mainLight = new THREE.DirectionalLight(0xFFEAB0, 1.4);
+mainLight.position.set(-2, 3, 5);
 scene3.add(mainLight);
 
-const rimLight = new THREE.DirectionalLight(0xE8A020, 0.5);
-rimLight.position.set(2.5, 0.5, 2);
+const rimLight = new THREE.DirectionalLight(0xC8780A, 0.6);
+rimLight.position.set(3, 0.5, 2);
 scene3.add(rimLight);
 
-const backLight = new THREE.DirectionalLight(0x331800, 0.4);
-backLight.position.set(0, -1, -4);
+const backLight = new THREE.DirectionalLight(0xFFD080, 0.3);
+backLight.position.set(0, -1, -3);
 scene3.add(backLight);
 
 // ============================================================
