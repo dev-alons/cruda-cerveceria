@@ -131,154 +131,73 @@ backLight.position.set(0, -1, -4);
 scene3.add(backLight);
 
 // ============================================================
-// GEOMETRÍA — BOTELLA (LatheGeometry)
-// Perfil (x, y) girado alrededor del eje Y.
-// Proporciones basadas en botella 330ml real (ratio alto/diámetro ~3.4:1)
-// Altura total: 1.86 unidades  ·  Radio cuerpo: 0.270  →  ratio 3.44
-// ============================================================
-const bottleProfile = [
-  new THREE.Vector2(0.000, -1.00),  // centro del fondo (cierra la base)
-  new THREE.Vector2(0.215, -1.00),  // borde del fondo
-  new THREE.Vector2(0.240, -0.92),  // bisel base
-  new THREE.Vector2(0.262, -0.78),  // cuerpo inferior
-  new THREE.Vector2(0.270, -0.42),  // cuerpo medio
-  new THREE.Vector2(0.270,  0.03),  // cuerpo superior
-  new THREE.Vector2(0.263,  0.13),  // inicio hombro
-  new THREE.Vector2(0.242,  0.25),  // hombro
-  new THREE.Vector2(0.192,  0.37),  // fin hombro
-  new THREE.Vector2(0.118,  0.48),  // base cuello
-  new THREE.Vector2(0.090,  0.58),  // cuello (más fino: ratio 0.33 vs cuerpo)
-  new THREE.Vector2(0.088,  0.74),  // cuello superior
-  new THREE.Vector2(0.096,  0.80),  // inicio boca
-  new THREE.Vector2(0.088,  0.86),  // borde de la boca
-];
-
-const bottleGeo = new THREE.LatheGeometry(bottleProfile, 80);
-const glassMat = new THREE.MeshPhongMaterial({
-  color: 0x110800,
-  specular: 0xBB9940,
-  shininess: 220,
-  transparent: true,
-  opacity: 0.91,
-  side: THREE.DoubleSide,
-});
-const glassMesh = new THREE.Mesh(bottleGeo, glassMat);
-
-// Líquido interior (cerveza ámbar)
-const liquidProfile = bottleProfile.map(p => new THREE.Vector2(p.x * 0.91, p.y + 0.01));
-const liquidGeo = new THREE.LatheGeometry(liquidProfile, 80);
-const liquidMat = new THREE.MeshPhongMaterial({
-  color: 0xCC5A00,
-  emissive: 0x4E2000,
-  emissiveIntensity: 0.55,
-  transparent: true,
-  opacity: 0.82,
-  shininess: 15,
-  side: THREE.FrontSide,
-});
-const liquidMesh = new THREE.Mesh(liquidGeo, liquidMat);
-
-// ============================================================
-// TEXTURA DEL LABEL (canvas 2D → CanvasTexture)
-// ============================================================
-function makeLabelTexture() {
-  const c = document.createElement('canvas');
-  c.width = 1024; c.height = 512;
-  const ctx = c.getContext('2d');
-
-  // Fondo
-  ctx.fillStyle = '#0F0E0A';
-  ctx.fillRect(0, 0, 1024, 512);
-
-  // Borde exterior ámbar
-  ctx.strokeStyle = '#E8A020';
-  ctx.lineWidth = 7;
-  ctx.strokeRect(18, 18, 988, 476);
-
-  // Borde interior fino
-  ctx.strokeStyle = 'rgba(232,160,32,0.35)';
-  ctx.lineWidth = 2;
-  ctx.strokeRect(30, 30, 964, 452);
-
-  // Líneas horizontales decorativas
-  ctx.fillStyle = '#E8A020';
-  ctx.fillRect(55, 108, 914, 2);
-  ctx.fillRect(55, 390, 914, 2);
-
-  // Marca CRUDA (superior)
-  ctx.fillStyle = '#E8A020';
-  ctx.font = 'bold 36px monospace';
-  ctx.textAlign = 'center';
-  ctx.fillText('C  R  U  D  A', 512, 84);
-
-  // Nombre de la cerveza (grande)
-  ctx.fillStyle = '#F2ECD9';
-  ctx.font = 'bold 176px Arial, sans-serif';
-  ctx.fillText('BESTIA', 512, 305);
-
-  // Estilo y ABV
-  ctx.fillStyle = '#6B6558';
-  ctx.font = '26px monospace';
-  ctx.fillText('WEST COAST IPA  ·  7.2% ABV  ·  IBU 65', 512, 358);
-
-  // Lote / origen
-  ctx.fillStyle = 'rgba(107,101,88,0.5)';
-  ctx.font = '20px monospace';
-  ctx.fillText('LOTE #047  ·  COQUIMBO, CHILE  ·  EST. 2019', 512, 432);
-
-  return new THREE.CanvasTexture(c);
-}
-
-// Cilindro del label (posicionado en el cuerpo principal)
-const labelRadius = 0.274;
-const labelGeo = new THREE.CylinderGeometry(
-  labelRadius, labelRadius, 0.52, 80, 1, true
-);
-const labelMat = new THREE.MeshStandardMaterial({
-  map: makeLabelTexture(),
-  transparent: true,
-  opacity: 0,
-  roughness: 0.75,
-  metalness: 0,
-  side: THREE.FrontSide,
-  depthWrite: false,
-});
-const labelMesh = new THREE.Mesh(labelGeo, labelMat);
-labelMesh.position.y = -0.35;
-// Rotar para que el centro del label (U=0.5) apunte hacia la cámara (+Z)
-labelMesh.rotation.y = -Math.PI / 2;
-
-// Reflejo de vidrio (franja especular)
-const hlGeo = new THREE.CylinderGeometry(0.278, 0.278, 1.1, 32, 1, true, -0.38, 0.75);
-const hlMat = new THREE.MeshBasicMaterial({
-  color: 0xFFFFFF,
-  transparent: true,
-  opacity: 0.05,
-  depthWrite: false,
-  side: THREE.FrontSide,
-});
-const hlMesh = new THREE.Mesh(hlGeo, hlMat);
-hlMesh.position.y = -0.20;
-hlMesh.rotation.y = -0.85;
-
-// ============================================================
-// GRUPO BOTELLA
+// GRUPO BOTELLA + CARGA DEL MODELO GLB
 // ============================================================
 const bottleGroup = new THREE.Group();
-bottleGroup.add(glassMesh);
-bottleGroup.add(liquidMesh);
-bottleGroup.add(labelMesh);
-bottleGroup.add(hlMesh);
 scene3.add(bottleGroup);
 
-// Regenerar label con fuentes del sistema cuando estén listas
-if (document.fonts && document.fonts.ready) {
-  document.fonts.ready.then(() => {
-    labelMat.map = makeLabelTexture();
-    labelMat.map.needsUpdate = true;
-    labelMat.needsUpdate = true;
-  });
-}
+let labelMesh3D = null; // referencia a Mesh001 para animar opacidad del label
+
+const texLoader  = new THREE.TextureLoader();
+const gltfLoader = new THREE.GLTFLoader();
+
+// Pre-carga la textura del label
+const labelTex = texLoader.load('./assets/label.png');
+labelTex.flipY = false; // necesario para modelos GLB/GLTF
+
+gltfLoader.load('./assets/Bottle.glb',
+  (gltf) => {
+    const model = gltf.scene;
+
+    // --- Normalizar escala: hacer la botella ~1.9 unidades de alto ---
+    const box    = new THREE.Box3().setFromObject(model);
+    const size   = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const scaleN = 1.9 / size.y;
+    model.scale.setScalar(scaleN);
+
+    // Centrar en el origen (para que el grupo la mueva limpio)
+    model.position.set(
+      -center.x * scaleN,
+      -center.y * scaleN,
+      -center.z * scaleN
+    );
+
+    // --- Aplicar materiales según malla ---
+    model.traverse((child) => {
+      if (!child.isMesh) return;
+
+      if (child.name === 'Mesh001') {
+        // Etiqueta frontal → aplicar label.png
+        labelMesh3D = child;
+        child.material = new THREE.MeshStandardMaterial({
+          map: labelTex,
+          transparent: true,
+          opacity: 0,       // empieza invisible, el scroll lo anima
+          roughness: 0.75,
+          metalness: 0.0,
+          side: THREE.FrontSide,
+        });
+
+      } else if (child.name === 'Mesh001_1') {
+        // Etiqueta trasera → ocultar
+        child.visible = false;
+
+      } else {
+        // Tapa u otras mallas → color dorado
+        child.material = new THREE.MeshPhongMaterial({
+          color:    0xC8960C,
+          specular: 0xFFCC44,
+          shininess: 200,
+        });
+      }
+    });
+
+    bottleGroup.add(model);
+  },
+  null,
+  (err) => console.error('Error cargando Bottle.glb:', err)
+);
 
 // ============================================================
 // ESTADO SUAVIZADO (lerp en el loop de animación)
@@ -307,7 +226,7 @@ function animate() {
   bottleGroup.position.y = t3.posY;
   bottleGroup.scale.setScalar(t3.scale * BASE_BOTTLE_SCALE);
 
-  labelMesh.material.opacity = t3.labelOp;
+  if (labelMesh3D) labelMesh3D.material.opacity = t3.labelOp;
 
   // Iluminación dinámica por escena
   ambientLight.intensity = 0.4  * t3.lightScale;
