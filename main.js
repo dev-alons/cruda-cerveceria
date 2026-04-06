@@ -145,8 +145,11 @@ const gltfLoader = new THREE.GLTFLoader();
 const labelTex = texLoader.load('./assets/label.png');
 labelTex.flipY = false; // necesario para modelos GLB/GLTF
 
+console.log('[CRUDA] Cargando Bottle.glb...');
+
 gltfLoader.load('./assets/Bottle.glb',
   (gltf) => {
+    console.log('[CRUDA] Bottle.glb cargado ✓');
     const model = gltf.scene;
 
     // --- Normalizar escala: hacer la botella ~1.9 unidades de alto ---
@@ -195,8 +198,8 @@ gltfLoader.load('./assets/Bottle.glb',
 
     bottleGroup.add(model);
   },
-  null,
-  (err) => console.error('Error cargando Bottle.glb:', err)
+  (xhr) => console.log(`[CRUDA] GLB: ${Math.round(xhr.loaded / xhr.total * 100)}%`),
+  (err) => console.error('[CRUDA] Error cargando Bottle.glb:', err)
 );
 
 // ============================================================
