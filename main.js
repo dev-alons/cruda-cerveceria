@@ -13,38 +13,38 @@
 const SCENES = [
   {
     id: 0,
-    name: '01 · MISTERIO',
+    name: '01 · ORIGEN',
     bgId: 'bg-0',
-    // Botella entera visible pero oscura — lejos, silueteada, sin revelar
+    darkTheme: true,
+    // Botella de espaldas, silueteada — no se revela nada aún
     bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
-    bottleRotateZ: -3, bottleRotateY: -25,
-    labelOpacity: 0, shadowWidth: 30,
-    // Cámara lejana — ve la botella completa, pequeña en el encuadre
-    cameraX: 0.0, cameraY: 0.1, cameraZ: 6.8,
+    bottleRotateZ: -3, bottleRotateY: -40,
+    labelOpacity: 0, shadowWidth: 20,
+    cameraX: 0.0, cameraY: 0.1, cameraZ: 7.0,
     targetX: 0.0, targetY: 0.0, targetZ: 0.0,
     fov: 26,
-    ambientInt: 0.12, mainInt: 0.2,
-    rimInt: 2.2,        // silueta definida por contraluz
-    glowOp: 0.12,
+    ambientInt: 0.10, mainInt: 0.15,
+    rimInt: 2.5,
+    glowOp: 0.08,
     fogDensity: 0.0,
-    cinemaText: 'No es solo cerveza.',
+    cinemaText: 'Nació en la oscuridad.',
     showCTA: false,
   },
   {
     id: 1,
-    name: '02 · REVEAL',
+    name: '02 · IDENTIDAD',
     bgId: 'bg-1',
-    // Cámara se acerca — primer plano de la etiqueta frontal
+    darkTheme: true,
+    // Dolly in extremo — la etiqueta se revela de frente
     bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
     bottleRotateZ: 0, bottleRotateY: 0,
     labelOpacity: 1.0, shadowWidth: 100,
-    // Dolly in: cámara muy cerca, centrada en la etiqueta
-    cameraX: 0.0, cameraY: 0.05, cameraZ: 2.4,
+    cameraX: 0.0, cameraY: 0.05, cameraZ: 2.2,
     targetX: 0.0, targetY: 0.0, targetZ: 0.0,
-    fov: 22,
+    fov: 20,
     ambientInt: 0.75, mainInt: 1.2,
     rimInt: 0.3,
-    glowOp: 0.55,
+    glowOp: 0.60,
     fogDensity: 0.0,
     cinemaText: 'Es carácter en estado líquido.',
     showCTA: false,
@@ -53,36 +53,74 @@ const SCENES = [
     id: 2,
     name: '03 · FRÍO',
     bgId: 'bg-2',
-    // Cámara se aleja — toma baja y dramática, niebla fría sube desde el piso
+    darkTheme: true,
+    // Cámara baja dramática — niebla fría sube desde el suelo
     bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
     bottleRotateZ: 0, bottleRotateY: 20,
     labelOpacity: 0.9, shadowWidth: 200,
-    // Ángulo bajo dramático — como si estuvieras mirando la botella desde abajo
     cameraX: 0.15, cameraY: -0.6, cameraZ: 4.2,
     targetX: 0.0, targetY: 0.3, targetZ: 0.0,
     fov: 30,
     ambientInt: 0.45, mainInt: 0.85,
-    rimInt: 2.5,         // contraluz fuerte — halo alrededor de la botella
-    glowOp: 0.90,        // glow en su punto máximo
-    fogDensity: 0.07,    // niebla fría visible
+    rimInt: 2.5,
+    glowOp: 0.90,
+    fogDensity: 0.07,
     cinemaText: 'Fría. Intensa. Lista.',
     showCTA: false,
   },
   {
     id: 3,
-    name: '04 · HERO',
+    name: '04 · VERTIDO',
     bgId: 'bg-3',
-    // Encuadre final limpio — botella perfecta, iluminada, CTA visible
+    darkTheme: true,
+    // Cámara lateral — botella inclinada como si fuera a servirse
     bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
-    bottleRotateZ: 0, bottleRotateY: 20,
-    labelOpacity: 1.0, shadowWidth: 150,
-    // Cámara ligeramente lateral — encuadre de producto premium
-    cameraX: 0.5, cameraY: 0.15, cameraZ: 5.0,
+    bottleRotateZ: -22, bottleRotateY: 40,
+    labelOpacity: 1.0, shadowWidth: 70,
+    cameraX: 1.4, cameraY: 0.3, cameraZ: 4.8,
+    targetX: 0.0, targetY: 0.1, targetZ: 0.0,
+    fov: 27,
+    ambientInt: 0.55, mainInt: 0.95,
+    rimInt: 1.0,
+    glowOp: 0.40,
+    fogDensity: 0.0,
+    cinemaText: 'El momento de abrirla.',
+    showCTA: false,
+  },
+  {
+    id: 4,
+    name: '05 · ESPUMA',
+    bgId: 'bg-4',
+    darkTheme: false,
+    // Fondo claro dorado — botella en plena luz, celebratoria
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: 0, bottleRotateY: -15,
+    labelOpacity: 1.0, shadowWidth: 170,
+    cameraX: -0.3, cameraY: 0.1, cameraZ: 5.2,
+    targetX: 0.0, targetY: 0.15, targetZ: 0.0,
+    fov: 25,
+    ambientInt: 1.2, mainInt: 1.9,
+    rimInt: 0.35,
+    glowOp: 0.18,
+    fogDensity: 0.0,
+    cinemaText: 'Espuma, aroma, ritual.',
+    showCTA: false,
+  },
+  {
+    id: 5,
+    name: '06 · BRINDIS',
+    bgId: 'bg-5',
+    darkTheme: false,
+    // Parchment pleno — encuadre hero premium, CTA
+    bottleX: 0.0, bottleY: 0.0, bottleScale: 1.0,
+    bottleRotateZ: 0, bottleRotateY: 18,
+    labelOpacity: 1.0, shadowWidth: 155,
+    cameraX: 0.4, cameraY: 0.15, cameraZ: 5.0,
     targetX: 0.0, targetY: 0.0, targetZ: 0.0,
     fov: 24,
-    ambientInt: 1.0, mainInt: 1.6,
-    rimInt: 0.55,
-    glowOp: 0.30,
+    ambientInt: 1.5, mainInt: 2.2,
+    rimInt: 0.25,
+    glowOp: 0.12,
     fogDensity: 0.0,
     cinemaText: 'Descubre la experiencia.',
     showCTA: true,
@@ -379,6 +417,7 @@ const BASE_SCALE = 1.15;
 // DOM REFERENCES
 // ============================================================
 const journeySection     = document.getElementById('journey');
+const journeySticky      = document.getElementById('journeySticky');
 const cinemaOverlay      = document.getElementById('cinemaOverlay');
 const cinemaNumEl        = document.getElementById('cinemaNum');
 const cinemaTextEl       = document.getElementById('cinemaText');
@@ -433,6 +472,11 @@ function applyScene(scene) {
   document.querySelectorAll('.journey__bg').forEach(bg => bg.style.opacity = '0');
   const bg = document.getElementById(scene.bgId);
   if (bg) bg.style.opacity = '1';
+
+  // Tema claro / oscuro
+  if (journeySticky) {
+    journeySticky.setAttribute('data-theme', scene.darkTheme ? 'dark' : 'light');
+  }
 
   // Dots y nombre
   sceneDots.forEach((dot, i) => dot.classList.toggle('active', i === scene.id));
@@ -514,7 +558,8 @@ function init() {
   resizeRenderer();
   requestAnimationFrame(animate);
   onScroll();
-  // Mostrar texto inicial
+  // Mostrar texto y tema inicial
+  if (journeySticky) journeySticky.setAttribute('data-theme', 'dark');
   setTimeout(() => {
     cinemaTextEl.textContent = SCENES[0].cinemaText;
     cinemaTextEl.classList.add('visible');

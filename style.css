@@ -144,7 +144,7 @@ ul { list-style: none; }
   background: #080604;
 }
 .journey__scroll-space {
-  height: 500vh;
+  height: 700vh;
 }
 
 /* Sticky viewport */
@@ -163,22 +163,30 @@ ul { list-style: none; }
   transition: opacity 1s var(--ease);
   z-index: 0;
 }
-/* Escena 1: Misterio — casi negro, toque cálido */
+/* 01 ORIGEN — casi negro, toque cálido */
 #bg-0 {
   background: radial-gradient(ellipse at 55% 45%, #1A0E06 0%, #080604 75%);
   opacity: 1;
 }
-/* Escena 2: Reveal — cálido oscuro con glow ámbar */
+/* 02 IDENTIDAD — ámbar oscuro, glow de marca */
 #bg-1 {
   background: radial-gradient(ellipse at 40% 50%, #2A1408 0%, #0A0806 65%);
 }
-/* Escena 3: Impacto frío — azul muy oscuro para contraste */
+/* 03 FRÍO — azul muy oscuro */
 #bg-2 {
   background: radial-gradient(ellipse at 50% 60%, #060A10 0%, #04060C 80%);
 }
-/* Escena 4: Hero final — oscuro cálido, limpio */
+/* 04 VERTIDO — oscuro cálido con más cuerpo */
 #bg-3 {
-  background: radial-gradient(ellipse at 50% 50%, #160E04 0%, #0A0806 70%);
+  background: radial-gradient(ellipse at 60% 50%, #1E1006 0%, #0E0804 70%);
+}
+/* 05 ESPUMA — parchment dorado cálido */
+#bg-4 {
+  background: radial-gradient(ellipse at 45% 45%, #EED898 0%, #E4CC80 55%, #D8BF72 100%);
+}
+/* 06 BRINDIS — parchment pleno, tema del sitio */
+#bg-5 {
+  background: radial-gradient(ellipse at 50% 40%, #FAF4E0 0%, #F5EED8 65%);
 }
 
 /* ============================================================
@@ -214,7 +222,7 @@ ul { list-style: none; }
   color: #F5EED8;
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease), color 0.8s var(--ease);
 }
 .cinema-overlay__text.visible {
   opacity: 1;
@@ -391,7 +399,7 @@ ul { list-style: none; }
 }
 .scene-cta a:hover { box-shadow: 2px 2px 0 var(--c-amber); transform: translate(4px,4px); }
 
-/* Bottom bar — contexto oscuro (dentro de .journey) */
+/* Bottom bar — adapta al tema de la escena */
 .journey__bottom-bar {
   position: absolute;
   bottom: 0; left: 0; right: 0;
@@ -403,6 +411,7 @@ ul { list-style: none; }
   border-top: 1px solid rgba(245,238,216,0.06);
   background: rgba(8,6,4,0.5);
   backdrop-filter: blur(10px);
+  transition: background 0.8s var(--ease), border-top-color 0.8s var(--ease);
 }
 .scene-dots { display: flex; gap: 0.6rem; align-items: center; }
 .scene-dot {
@@ -433,6 +442,35 @@ ul { list-style: none; }
   width: 0%;
   background: var(--c-amber);
   transition: width 0.1s linear;
+}
+
+/* ============================================================
+   TEMA CLARO — escenas 05 y 06 (parchment)
+   ============================================================ */
+.journey__sticky[data-theme="light"] .cinema-overlay__text {
+  color: var(--c-cream);
+}
+.journey__sticky[data-theme="light"] .cinema-overlay__num {
+  opacity: 0.85;
+}
+.journey__sticky[data-theme="light"] .journey__bottom-bar {
+  background: rgba(245,238,216,0.82);
+  border-top-color: rgba(28,23,16,0.1);
+}
+.journey__sticky[data-theme="light"] .scene-name-bar {
+  color: rgba(28,23,16,0.45);
+}
+.journey__sticky[data-theme="light"] .scene-dot {
+  background: rgba(28,23,16,0.18);
+}
+.journey__sticky[data-theme="light"] .scene-dot.active {
+  background: var(--c-amber);
+}
+.journey__sticky[data-theme="light"] .scroll-progress-bar {
+  background: rgba(28,23,16,0.1);
+}
+.journey__sticky[data-theme="light"] .bottle__shadow {
+  background: radial-gradient(ellipse, rgba(28,23,16,0.25) 0%, transparent 70%);
 }
 
 /* ===========================================================
