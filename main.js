@@ -567,7 +567,51 @@ function init() {
   }, 400);
 }
 
-window.addEventListener('scroll', onScroll, { passive: true });
+// ============================================================
+// SCROLL SNAP — ajusta al keyframe más cercano al soltar el scroll
+// ============================================================
+let snapTimer  = null;
+let isSnapping = false;
+
+function getSceneBoundaries() {
+  if (!journeySection) return [];
+  const top         = journeySection.offsetTop;
+  const totalScroll = journeySection.offsetHeight - window.innerHeight;
+  return SCENES.map((_, i) => top + totalScroll * (i / (SCENES.length - 1)));
+}
+
+function snapToNearest() {
+  if (isSnapping) return;
+  const boundaries = getSceneBoundaries();
+  const y          = window.scrollY;
+  const first      = boundaries[0];
+  const last       = boundaries[boundaries.length - 1];
+
+  // Solo actuar dentro del journey
+  if (y < first - 60 || y > last + 60) return;
+
+  let target = boundaries[0];
+  let minDist = Infinity;
+  for (const b of boundaries) {
+    const d = Math.abs(y - b);
+    if (d < minDist) { minDist = d; target = b; }
+  }
+
+  if (Math.abs(y - target) < 8) return; // ya estamos en el punto
+
+  isSnapping = true;
+  window.scrollTo({ top: target, behavior: 'smooth' });
+  setTimeout(() => { isSnapping = false; }, 900);
+}
+
+window.addEventListener('scroll', () => {
+  onScroll();
+  if (!isSnapping) {
+    if (snapTimer) clearTimeout(snapTimer);
+    snapTimer = setTimeout(snapToNearest, 180);
+  }
+}, { passive: true });
+
 window.addEventListener('resize', () => { resizeRenderer(); onScroll(); });
 
 if (document.readyState === 'loading') {
